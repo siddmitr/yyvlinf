@@ -196,10 +196,11 @@ footer p+p{margin-top:6px}
 
   <section id="actions">
     <h2>When TKE missed its promise</h2>
-    <p class="sec-sub">Every time TKE was late to respond, and every lift installed late, with what the society did about it. "No data provided" means the society has not yet recorded an action or outcome.</p>
+    <p class="sec-sub">Every time TKE was late to respond, every 30 days in which a lift broke down more than TKE's limit of once, and every lift installed late, with what the society did about it. "No data provided" means the society has not yet recorded an action or outcome.</p>
     <div class="tabs" id="actTabs">
       <button data-f="all" aria-pressed="true">All</button>
       <button data-f="svc" aria-pressed="false">Late response</button>
+      <button data-f="bk" aria-pressed="false">Too many breakdowns</button>
       <button data-f="inst" aria-pressed="false">Late installation</button>
     </div>
     <div class="acts" id="acts"></div>
@@ -402,11 +403,25 @@ function instActs(){
       '<p class="what">'+what+(r.ps?' (plan: '+fDs(r.ps)+' to '+fDs(r.pe)+')':'')+'.</p>'+
       '<div class="grid"><div><span>Delay penalty</span>'+(pen&&pen!=='Not applicable'?esc(pen):NODATA)+'</div><div><span>Delay accepted as not TKE\'s fault</span>'+exc+'</div></div></div>'; }).join('');
 }
+function bkList(){ const out=[]; R.forEach(r=>periods(r).forEach((p,k)=>{ if(p.bk>BK_LIMIT) out.push({r,p,k}); })); return out.sort((x,y)=>y.p.a-x.p.a); }
+function bkActs(){
+  const list=bkList();
+  if(!list.length) return '<p class="muted">No lift has broken down more than once in any 30 days.</p>';
+  return list.map(({r,p,k})=>{ const end=new Date(Math.min(p.b-DAY,today));
+    const days=p.es.filter(e=>!e.n).map(e=>fDs(e.dt)).join(', ');
+    return '<div class="act"><div class="act-h"><b>'+esc(fullName(r.l))+' · '+fDs(p.a)+' to '+fDs(end)+(p.part?' (so far)':'')+'</b><span class="late">'+pl(p.bk,'breakdown')+' in 30 days</span></div>'+
+      '<p class="what">TKE\'s limit is '+pl(BK_LIMIT,'breakdown')+' per lift in a month. Breakdowns on: '+esc(days)+'.'+(p.tr?' People were trapped in this period.':'')+'</p>'+
+      '<div class="grid"><div><span>What the society did</span>'+NODATA+'</div><div><span>TKE\'s reply / outcome</span>'+NODATA+'</div></div>'+
+      '<p class="note">'+esc('Period '+(k+1)+' since this lift came into use on '+fDs(r.com)+'.')+'</p></div>'; }).join('');
+}
 let af='all';
-function renderActs(){ $('acts').innerHTML=af==='svc'?svcActs():af==='inst'?instActs():'<h3>Late response ('+nSvc+')</h3>'+svcActs()+'<h3 style="margin-top:14px">Late installation ('+nInst+')</h3>'+instActs(); $('actTabs').querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.f===af)); }
+const nSvc=(D.br||[]).length, nInst=R.filter(r=>r.late>0).length, nBk=bkList().length;
+function renderActs(){
+  const H=(t,n)=>'<h3 style="margin-top:14px">'+t+' ('+n+')</h3>';
+  $('acts').innerHTML=af==='svc'?svcActs():af==='inst'?instActs():af==='bk'?bkActs():H('Late response',nSvc)+svcActs()+H('Too many breakdowns',nBk)+bkActs()+H('Late installation',nInst)+instActs();
+  $('actTabs').querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.f===af)); }
 $('actTabs').addEventListener('click',e=>{const b=e.target.closest('button'); if(b){af=b.dataset.f; renderActs();}});
-const nSvc=(D.br||[]).length, nInst=R.filter(r=>r.late>0).length;
-$('actTabs').children[0].textContent='All ('+(nSvc+nInst)+')'; $('actTabs').children[1].textContent='Late response ('+nSvc+')'; $('actTabs').children[2].textContent='Late installation ('+nInst+')';
+const tb=$('actTabs').children; tb[0].textContent='All ('+(nSvc+nBk+nInst)+')'; tb[1].textContent='Late response ('+nSvc+')'; tb[2].textContent='Too many breakdowns ('+nBk+')'; tb[3].textContent='Late installation ('+nInst+')';
 renderActs();
 
 // ---------- promises ----------
