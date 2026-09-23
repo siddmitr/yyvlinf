@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>YYV Lift Report: Installation and Performance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Semi+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EDF0F2; --surface:#FFFFFF; --ink:#1B2831; --muted:#5E6E79; --line:#D3DADF;
+  --panel:#1F2C35; --panel-ink:#C9D3DA; --lit:#F4B000; --good:#23845A; --warn:#C47F00; --bad:#C23D35;
+  --bar:#6F8796; --bar2:#B7C4CC; --focus:#1463B8;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light dark;
+}
+@media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){
+  --bg:#12191E; --surface:#1A242B; --ink:#E4EAEE; --muted:#93A3AE; --line:#2C3A43;
+  --panel:#0C1216; --panel-ink:#A9B6BF; --lit:#FFC21A; --good:#3DB27D; --warn:#E0A11E; --bad:#E0625A;
+  --bar:#8AA3B2; --bar2:#3E515D; --focus:#6AA8F0;
+}}
+:root[data-theme="dark"]{
+  --bg:#12191E; --surface:#1A242B; --ink:#E4EAEE; --muted:#93A3AE; --line:#2C3A43;
+  --panel:#0C1216; --panel-ink:#A9B6BF; --lit:#FFC21A; --good:#3DB27D; --warn:#E0A11E; --bad:#E0625A;
+  --bar:#8AA3B2; --bar2:#3E515D; --focus:#6AA8F0;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 Barlow,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:980px;margin:0 auto;padding:20px 18px 48px}
+h1,h2,h3,.num{font-family:"Barlow Semi Condensed",Barlow,"Arial Narrow",sans-serif}
+h1{font-size:1.5rem;font-weight:600;margin:0}
+h2{font-size:1.45rem;font-weight:600;margin:0 0 4px;letter-spacing:-.01em}
+h3{font-size:1.05rem;font-weight:600;margin:0}
+p{margin:0}
+.muted{color:var(--muted)}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:6px}
+
+.sample{background:var(--lit);color:#1B1B1B;padding:9px 14px;border-radius:8px;font-weight:500;font-size:.92rem;margin-bottom:16px}
+header.top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+
+/* Hero: lift landing indicator */
+.indicator{background:var(--panel);border-radius:18px;padding:22px 22px 18px;color:var(--panel-ink);display:grid;grid-template-columns:auto 1fr;gap:6px 22px;align-items:center;position:relative;overflow:hidden}
+.indicator::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(255,255,255,.018) 0 2px,transparent 2px 5px);pointer-events:none}
+.digits{font-family:"Barlow Semi Condensed",sans-serif;font-weight:700;font-size:clamp(4.2rem,17vw,7.5rem);line-height:.9;color:var(--lit);text-shadow:0 0 18px color-mix(in srgb,var(--lit) 45%,transparent);font-variant-numeric:tabular-nums;display:flex;align-items:center;gap:.12em}
+.digits .of{font-size:.42em;color:color-mix(in srgb,var(--lit) 60%,var(--panel));font-weight:600}
+.arrow{width:.46em;height:.46em;display:inline-block}
+.ind-copy .big{font-size:1.2rem;color:#fff;font-weight:500;line-height:1.3}
+.ind-copy .small{font-size:.95rem;margin-top:6px}
+.pending{margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.12)}
+@media (max-width:560px){.indicator{grid-template-columns:1fr}}
+
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:14px}
+.fact{background:var(--surface);padding:14px 16px}
+.fact .num{font-size:1.9rem;font-weight:600;line-height:1.1;font-variant-numeric:tabular-nums}
+.fact .lbl{font-size:.9rem;color:var(--muted)}
+.fact .delta{font-size:.85rem;font-weight:500;margin-top:2px}
+@media (max-width:620px){.facts{grid-template-columns:1fr}}
+
+/* controls */
+.controls{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:12px 0;margin:22px 0 6px;display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;border-bottom:1px solid var(--line)}
+.seg{display:inline-flex;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:3px;overflow-x:auto;max-width:100%}
+.seg button{border:0;background:none;padding:7px 13px;border-radius:7px;cursor:pointer;white-space:nowrap;font-weight:500;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.focus-chip{display:none;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--focus);border-radius:99px;padding:4px 6px 4px 12px;font-weight:500}
+.focus-chip.on{display:inline-flex}
+.focus-chip button{border:0;background:var(--bg);border-radius:99px;width:26px;height:26px;cursor:pointer}
+
+section{margin-top:30px}
+.verdict{display:flex;gap:14px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--muted);border-radius:12px;padding:16px 18px;margin-top:12px}
+.verdict.good{border-left-color:var(--good)} .verdict.warn{border-left-color:var(--warn)} .verdict.bad{border-left-color:var(--bad)}
+.verdict .tag{font-family:"Barlow Semi Condensed",sans-serif;font-weight:700;font-size:1.25rem;white-space:nowrap}
+.verdict.good .tag{color:var(--good)} .verdict.warn .tag{color:var(--warn)} .verdict.bad .tag{color:var(--bad)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;margin-top:12px}
+.chart-box{position:relative;height:260px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:760px){.grid2{grid-template-columns:1fr}}
+@media (max-width:560px){.verdict{flex-direction:column;gap:4px}}
+.card .sub{font-size:.9rem;color:var(--muted);margin:2px 0 10px}
+
+.lifts{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;margin-top:12px}
+.lift{text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;cursor:pointer;display:flex;flex-direction:column;gap:6px;transition:border-color .15s}
+.lift:hover{border-color:var(--bar)}
+.lift.pend{cursor:default;border-style:dashed;background:transparent}
+.lift.pend:hover{border-color:var(--line)}
+.lift[aria-pressed="true"]{border:2px solid var(--focus);padding:11px 13px}
+.lift .row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:6px;vertical-align:1px}
+.lift canvas{width:100%;height:38px}
+.trend{font-size:.85rem;font-weight:600}
+.t-good{color:var(--good)} .t-warn{color:var(--warn)} .t-bad{color:var(--bad)} .t-new{color:var(--muted)}
+footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-size:.9rem;color:var(--muted)}
+footer p+p{margin-top:6px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+.digits .pct{font-size:.5em}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:14px}
+@media (max-width:760px){.kpis{grid-template-columns:1fr 1fr}}
+.kpis .fact .num{font-size:1.7rem}
+.slabar{display:flex;height:14px;border-radius:99px;overflow:hidden;background:var(--bar2);margin:10px 0 6px}
+.slabar span{display:block;height:100%}
+.acts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-top:12px}
+.act{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--surface)}
+.act .num{font-size:1.5rem;font-weight:600;line-height:1.1}
+.act.pending{border-color:var(--warn)}
+.act.pending .num{color:var(--warn)}
+.tbl-wrap{overflow-x:auto;margin-top:12px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:.93rem}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:600;color:var(--muted);font-size:.85rem;background:color-mix(in srgb,var(--bg) 60%,var(--surface))}
+tr:last-child td{border-bottom:0}
+td.late{font-variant-numeric:tabular-nums;white-space:nowrap}
+.pill{display:inline-block;padding:1px 9px;border-radius:99px;font-size:.85rem;font-weight:500;border:1px solid var(--line);white-space:nowrap}
+.pill.p-pend{border-color:var(--warn);color:var(--warn)}
+.pill.p-esc{border-color:var(--bad);color:var(--bad)}
+.pill.p-ok{border-color:var(--good);color:var(--good)}
+.more{margin-top:10px;border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:8px 14px;cursor:pointer;font-weight:500}
+.tblfilter{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.tblfilter button{border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:5px 12px;cursor:pointer;font-size:.9rem}
+.tblfilter button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.lift .stats{display:flex;gap:14px;font-size:.88rem;color:var(--muted)}
+.lift .stats b{color:var(--ink);font-weight:600}
+.scope-note{font-size:.95rem;color:var(--muted);margin-top:4px}
+
+.trendtop{margin:4px 0 22px}
+.trendtop h2{font-size:1.7rem}
+.tt-head{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap}
+.tt-summary{font-size:1.08rem;margin:6px 0 2px;max-width:62ch}
+.tt-summary b{font-family:"Barlow Semi Condensed",sans-serif;font-weight:700;font-size:1.25em}
+.trendtop .chart-box{height:300px}
+.tt-note{font-size:.88rem;color:var(--muted);margin-top:8px}
+.overview{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:760px){.overview{grid-template-columns:1fr}}
+.overview .indicator{grid-template-columns:1fr;cursor:pointer;text-align:left;border:0;font:inherit;align-content:start;gap:4px}
+.overview .indicator:hover{outline:2px solid color-mix(in srgb,var(--lit) 45%,transparent);outline-offset:0}
+.overview .digits{font-size:clamp(3.6rem,11vw,5.6rem)}
+.ov-h{font-family:"Barlow Semi Condensed",sans-serif;font-weight:600;font-size:1.1rem;color:#fff;position:relative;z-index:1}
+.ov-go{margin-top:10px;font-size:.92rem;color:var(--lit);font-weight:500;position:relative;z-index:1}
+.ind-copy{position:relative;z-index:1}
+.part-seg button{font-weight:600}
+.gantt{margin-top:6px}
+.g-axis{display:grid;grid-template-columns:var(--gl) 1fr;font-size:.8rem;color:var(--muted);margin-bottom:4px}
+.g-axis .ticks{position:relative;height:18px}
+.g-axis .ticks span{position:absolute;transform:translateX(-50%);white-space:nowrap}
+.g-row{display:grid;grid-template-columns:var(--gl) 1fr;align-items:center;min-height:46px;border-top:1px solid var(--line);cursor:pointer;background:none;border-left:0;border-right:0;border-bottom:0;width:100%;text-align:left;padding:0;font:inherit;color:inherit}
+.g-row:hover .g-track{background:color-mix(in srgb,var(--bar2) 25%,transparent)}
+.g-row[aria-expanded="true"] .g-track{background:color-mix(in srgb,var(--bar2) 35%,transparent)}
+.g-label{padding:6px 10px 6px 0;line-height:1.2}
+.g-label b{font-weight:600;display:block;font-size:.95rem}
+.g-label small{font-size:.8rem}
+.g-track{position:relative;height:46px;border-radius:6px}
+.g-grid{position:absolute;top:0;bottom:0;width:1px;background:var(--line)}
+.g-today{position:absolute;top:0;bottom:0;width:0;border-left:2px dashed var(--muted);opacity:.6}
+.g-bar{position:absolute;top:15px;height:16px;border-radius:4px}
+.g-bar.prog{background-image:repeating-linear-gradient(135deg,rgba(255,255,255,.35) 0 5px,transparent 5px 10px)}
+.g-target{position:absolute;top:8px;bottom:8px;width:3px;margin-left:-1.5px;background:var(--ink);border-radius:2px}
+.g-dot{position:absolute;top:19px;width:8px;height:8px;margin-left:-4px;border-radius:50%;background:var(--surface);border:2px solid var(--ink)}
+.g-detail{grid-column:1/-1;padding:4px 0 12px;font-size:.9rem;color:var(--muted);display:none}
+.g-detail.on{display:block}
+.g-detail ol{margin:6px 0 0;padding-left:20px}
+.g-legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.85rem;color:var(--muted);margin:4px 0 12px}
+.g-legend i{display:inline-block;width:14px;height:10px;border-radius:3px;margin-right:6px;vertical-align:0}
+@media (max-width:560px){.gantt{--gl:96px}.g-label b{font-size:.85rem}}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div id="sampleBanner" class="sample" hidden>Preview with sample figures. Real numbers appear once the society's lift tracker is filled in.</div>
+  <header class="top">
+    <div>
+      <h1>YYV lift report: installation and performance</h1>
+      <p class="scope-note" id="scopeNote"></p>
+    </div>
+    <span class="muted" id="asOf"></span>
+  </header>
+
+  <section class="trendtop" aria-labelledby="ttH">
+    <div class="tt-head">
+      <div>
+        <h2 id="ttH">Are lift issues coming down?</h2>
+        <p class="tt-summary" id="ttSum"></p>
+      </div>
+      <div class="seg" id="ttSeg" aria-label="Chart view">
+        <button data-v="cal" aria-pressed="true">Week by week</button>
+        <button data-v="age" aria-pressed="false">Weeks since commissioning</button>
+      </div>
+    </div>
+    <div class="card">
+      <p class="sub" id="ttSub"></p>
+      <div class="chart-box"><canvas id="cWeek" aria-label="Weekly issues trend"></canvas></div>
+      <p class="tt-note" id="ttNote"></p>
+    </div>
+  </section>
+
+  <div class="overview">
+    <button class="indicator" id="ovInst" aria-label="">
+      <span class="ov-h">Installation</span>
+      <div class="digits"><span id="ovCom">–</span><span class="of">/<span id="ovTot">–</span></span></div>
+      <div class="ind-copy"><p class="big" id="ovInstBig"></p><p class="small" id="ovInstSmall"></p></div>
+      <span class="ov-go">See installation details</span>
+    </button>
+    <button class="indicator" id="indicator" aria-label="">
+      <span class="ov-h">After commissioning</span>
+      <div class="digits"><svg class="arrow" id="arrow" viewBox="0 0 10 10" aria-hidden="true"><path d="M5 9 L0.5 2.5 H9.5 Z" fill="currentColor"/></svg><span id="bigPct">–</span><span class="pct">%</span></div>
+      <div class="ind-copy"><p class="big" id="indBig"></p><p class="small" id="indSmall"></p></div>
+      <span class="ov-go">See performance details</span>
+    </button>
+  </div>
+
+  <div class="controls" role="toolbar" aria-label="Filters">
+    <div class="seg part-seg" id="partSeg" aria-label="Report part">
+      <button data-p="inst" aria-pressed="false">Installation</button>
+      <button data-p="perf" aria-pressed="true">After commissioning</button>
+    </div>
+    <div class="seg" id="bldSeg" aria-label="Building"></div>
+    <div class="seg" id="rangeSeg" aria-label="Period">
+      <button data-r="all" aria-pressed="true">Since commissioning</button>
+      <button data-r="6" aria-pressed="false">6 months</button>
+      <button data-r="3" aria-pressed="false">3 months</button>
+    </div>
+    <span class="focus-chip" id="focusChip"><span id="focusName"></span><button aria-label="Show all lifts" id="clearFocus">✕</button></span>
+  </div>
+
+  <div id="partInst" hidden>
+  <section>
+    <h2>Was each lift finished within <span id="cdays">90</span> days?</h2>
+    <div class="verdict" id="iVerdict"><span class="tag" id="iTag"></span><p id="iText"></p></div>
+    <div class="kpis">
+      <div class="fact"><div class="num" id="iCom">–</div><div class="lbl">lifts commissioned</div><div class="delta muted" id="iComD"></div></div>
+      <div class="fact"><div class="num" id="iOn">–</div><div class="lbl">finished within the contract period</div><div class="delta muted" id="iOnD"></div></div>
+      <div class="fact"><div class="num" id="iAvg">–</div><div class="lbl">average days to commission</div><div class="delta muted" id="iAvgD"></div></div>
+      <div class="fact"><div class="num" id="iDelay">–</div><div class="lbl">days of delay attributable to TKE</div><div class="delta muted" id="iDelayD"></div></div>
+    </div>
+    <div class="card">
+      <h3>Installation timeline</h3>
+      <p class="sub">Each bar runs from the day work started to commissioning (or today, if still in progress). Tap a lift for its stage dates.</p>
+      <div class="g-legend" id="gLegend"></div>
+      <div class="gantt" id="gantt" style="--gl:150px"></div>
+    </div>
+  </section>
+  <section>
+    <h2>Delays and penalties</h2>
+    <p class="muted">Delay counts days beyond the contract period, after removing days the society agreed were not TKE's fault.</p>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Lift</th><th>Work started</th><th>Commissioned</th><th>Days taken</th><th>TKE delay</th><th>Penalty</th></tr></thead>
+      <tbody id="iBody"></tbody>
+    </table></div>
+  </section>
+  </div>
+
+  <div id="partPerf">
+  <div class="kpis">
+    <div class="fact"><div class="num" id="kIssues">–</div><div class="lbl" id="kIssuesL">issues logged</div><div class="delta muted" id="kIssuesD"></div></div>
+    <div class="fact"><div class="num" id="kAvail">–</div><div class="lbl">of the time lifts were running</div><div class="delta muted" id="kAvailD"></div></div>
+    <div class="fact"><div class="num" id="kSla">–</div><div class="lbl">of complaints handled within TKE's service commitment</div><div class="delta muted" id="kSlaD"></div></div>
+    <div class="fact"><div class="num" id="kSnag">–</div><div class="lbl">installation issues fixed</div><div class="delta muted" id="kSnagD"></div></div>
+  </div>
+
+
+  <section id="secIssues">
+    <h2>How many issues each month?</h2>
+    <div class="verdict" id="verdict"><span class="tag" id="vTag"></span><p id="vText"></p></div>
+    <div class="card">
+      <h3>Issues logged each month</h3>
+      <p class="sub" id="bdSub"></p>
+      <div class="chart-box"><canvas id="cBd" aria-label="Issues per month chart"></canvas></div>
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <h3>What goes wrong most</h3>
+        <p class="sub">Issues by type, since commissioning.</p>
+        <div class="chart-box"><canvas id="cCat" aria-label="Issue types chart"></canvas></div>
+      </div>
+      <div class="card">
+        <h3>Share of time running</h3>
+        <p class="sub">After deducting hours lost to breakdowns.</p>
+        <div class="chart-box"><canvas id="cAvail" aria-label="Availability chart"></canvas></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="secSla">
+    <h2>Is TKE meeting its service commitments?</h2>
+    <p class="muted" id="slaIntro"></p>
+    <div class="card">
+      <h3>Complaints within vs. outside commitment</h3>
+      <div class="slabar" id="slaBar" aria-hidden="true"></div>
+      <p class="sub" id="slaBarTxt"></p>
+      <div class="chart-box"><canvas id="cSla" aria-label="SLA met and missed per month"></canvas></div>
+    </div>
+    <div class="card">
+      <h3>Time to respond and to repair</h3>
+      <p class="sub">Monthly averages, in hours from the complaint. Dashed lines are TKE's commitments.</p>
+      <div class="chart-box"><canvas id="cResp" aria-label="Response and repair time chart"></canvas></div>
+    </div>
+    <h3 style="margin-top:22px">What the society did when commitments were missed</h3>
+    <div class="acts" id="acts"></div>
+    <div class="tblfilter" id="tblFilter">
+      <button data-f="all" aria-pressed="true">All missed</button>
+      <button data-f="pending" aria-pressed="false">Action pending</button>
+      <button data-f="escalated" aria-pressed="false">Escalated or penalised</button>
+    </div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Date</th><th>Lift</th><th>What was missed</th><th>Over by</th><th>Action taken</th></tr></thead>
+      <tbody id="brBody"></tbody>
+    </table></div>
+    <button class="more" id="moreBtn" hidden>Show more</button>
+  </section>
+
+  <section>
+    <h2>Is TKE closing installation issues?</h2>
+    <div class="card">
+      <h3>Installation issues reported vs. fixed</h3>
+      <p class="sub">Running totals. The gap between the lines is what's still pending with TKE.</p>
+      <div class="chart-box"><canvas id="cSnag" aria-label="Installation issues chart"></canvas></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Lift by lift</h2>
+    <p class="muted">Tap a lift to see its own figures above.</p>
+    <div class="lifts" id="liftGrid"></div>
+  </section>
+
+  </div>
+
+  <footer>
+    <p id="footSrc"></p>
+    <p>Performance figures cover each lift from the month it was commissioned. Every fault should be reported to the security desk so it is logged with TKE and counted here.</p>
+  </footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script id="data" type="application/json">{"asOf":"2026-09-23","sample":true,"sla":{"resp":2,"rest":8},"months":["2026-03","2026-04","2026-05","2026-06","2026-07","2026-08","2026-09"],"lifts":[{"id":"YAR-P1","name":"Yarrow Lift 1","building":"Yarrow","handover":"2026-03-05"},{"id":"YAR-P2","name":"Yarrow Lift 2","building":"Yarrow","handover":"2026-03-20"},{"id":"YAR-S1","name":"Yarrow Service lift","building":"Yarrow","handover":"2026-04-10"},{"id":"YUC-P1","name":"Yucca Lift 1","building":"Yucca","handover":"2026-04-02"},{"id":"YUC-P2","name":"Yucca Lift 2","building":"Yucca","handover":"2026-04-25"},{"id":"YUC-S1","name":"Yucca Service lift","building":"Yucca","handover":null},{"id":"VIN-P1","name":"Vinca Lift 1","building":"Vinca","handover":null},{"id":"VIN-P2","name":"Vinca Lift 2","building":"Vinca","handover":"2026-06-03"},{"id":"VIN-S1","name":"Vinca Service lift","building":"Vinca","handover":null}],"m":{"YAR-P1":[{"i":5,"t":0,"dh":46.5,"rs":16.3,"rn":5,"ts":46.5,"tn":5,"sm":0,"sx":5,"sr":4,"sc":0},{"i":3,"t":1,"dh":32.5,"rs":6.9,"rn":3,"ts":32.5,"tn":3,"sm":0,"sx":3,"sr":2,"sc":2},{"i":2,"t":0,"dh":13.3,"rs":2.5,"rn":2,"ts":13.3,"tn":2,"sm":1,"sx":1,"sr":2,"sc":2},{"i":0,"t":0,"dh":0,"rs":0,"rn":0,"ts":0,"tn":0,"sm":0,"sx":0,"sr":0,"sc":2},{"i":2,"t":0,"dh":11.2,"rs":2.9,"rn":2,"ts":11.2,"tn":2,"sm":2,"sx":0,"sr":0,"sc":2},{"i":1,"t":0,"dh":5.1,"rs":0.4,"rn":1,"ts":5.1,"tn":1,"sm":1,"sx":0,"sr":0,"sc":0},{"i":1,"t":1,"dh":4.7,"rs":0.9,"rn":1,"ts":4.7,"tn":1,"sm":1,"sx":0,"sr":1,"sc":1}],"YAR-P2":[{"i":5,"t":0,"dh":51.9,"rs":15.6,"rn":5,"ts":51.9,"tn":5,"sm":0,"sx":5,"sr":3,"sc":0},{"i":3,"t":0,"dh":23.0,"rs":8.1,"rn":3,"ts":23.0,"tn":3,"sm":0,"sx":3,"sr":1,"sc":0},{"i":2,"t":0,"dh":16.4,"rs":3.6,"rn":2,"ts":16.4,"tn":2,"sm":1,"sx":1,"sr":1,"sc":1},{"i":2,"t":0,"dh":6.3,"rs":3.5,"rn":2,"ts":6.3,"tn":2,"sm":1,"sx":1,"sr":1,"sc":0},{"i":0,"t":0,"dh":0,"rs":0,"rn":0,"ts":0,"tn":0,"sm":0,"sx":0,"sr":0,"sc":1},{"i":0,"t":0,"dh":0,"rs":0,"rn":0,"ts":0,"tn":0,"sm":0,"sx":0,"sr":0,"sc":2},{"i":1,"t":0,"dh":6.1,"rs":1.5,"rn":1,"ts":6.1,"tn":1,"sm":1,"sx":0,"sr":1,"sc":1}],"YAR-S1":[null,{"i":6,"t":0,"dh":57.9,"rs":16.9,"rn":6,"ts":57.9,"tn":6,"sm":0,"sx":6,"sr":5,"sc":0},{"i":4,"t":0,"dh":35.7,"rs":10.3,"rn":4,"ts":35.7,"tn":4,"sm":0,"sx":4,"sr":2,"sc":2},{"i":3,"t":0,"dh":24.3,"rs":7.2,"rn":3,"ts":24.3,"tn":3,"sm":0,"sx":3,"sr":2,"sc":2},{"i":2,"t":1,"dh":8.3,"rs":3.0,"rn":2,"ts":8.3,"tn":2,"sm":1,"sx":1,"sr":3,"sc":2},{"i":0,"t":0,"dh":0,"rs":0,"rn":0,"ts":0,"tn":0,"sm":0,"sx":0,"sr":0,"sc":0},{"i":3,"t":0,"dh":15.7,"rs":3.0,"rn":3,"ts":15.7,"tn":3,"sm":3,"sx":0,"sr":0,"sc":0}],"YUC-P1":[null,{"i":6,"t":1,"dh":50.5,"rs":17.5,"rn":6,"ts":50.5,"tn":6,"sm":0,"sx":6,"sr":4,"sc":0},{"i":4,"t":1,"dh":34.1,"rs":9.7,"rn":4,"ts":34.1,"tn":4,"sm":0,"sx":4,"sr":3,"sc":2},{"i":2,"t":0,"dh":11.0,"rs":5.6,"rn":2,"ts":11.0,"tn":2,"sm":0,"sx":2,"sr":0,"sc":1},{"i":2,"t":0,"dh":11.3,"rs":3.8,"rn":2,"ts":11.3,"tn":2,"sm":1,"sx":1,"sr":0,"sc":2},{"i":0,"t":0,"dh":0,"rs":0,"rn":0,"ts":0,"tn":0,"sm":0,"sx":0,"sr":0,"sc":0},{"i":1,"t":0,"dh":6.6,"rs":3.2,"rn":1,"ts":6.6,"tn":1,"sm":0,"sx":1,"sr":0,"sc":2}],"YUC-P2":[null,{"i":4,"t":1,"dh":38.5,"rs":10.9,"rn":4,"ts":38.5,"tn":4,"sm":0,"sx":4,"sr":2,"sc":0},{"i":3,"t":0,"dh":26.8,"rs":8.4,"rn":3,"ts":26.8,"tn":3,"sm":0,"sx":3,"sr":2,"sc":3},{"i":3,"t":0,"dh":16.5,"rs":6.6,"rn":3,"ts":16.5,"tn":3,"sm":1,"sx":2,"sr":2,"sc":0},{"i":1,"t":0,"dh":4.6,"rs":0.6,"rn":1,"ts":4.6,"tn":1,"sm":1,"sx":0,"sr":1,"sc":1},{"i":1,"t":0,"dh":5.1,"rs":0.6,"rn":1,"ts":5.1,"tn":1,"sm":1,"sx":0,"sr":1,"sc":1},{"i":1,"t":0,"dh":2.0,"rs":0.4,"rn":1,"ts":2.0,"tn":1,"sm":1,"sx":0,"sr":1,"sc":2}],"YUC-S1":[null,null,null,null,null,null,null],"VIN-P1":[null,null,null,null,null,null,null],"VIN-P2":[null,null,null,{"i":2,"t":1,"dh":17.4,"rs":6.7,"rn":2,"ts":17.4,"tn":2,"sm":0,"sx":2,"sr":2,"sc":0},{"i":3,"t":0,"dh":21.5,"rs":8.0,"rn":3,"ts":21.5,"tn":3,"sm":0,"sx":3,"sr":1,"sc":1},{"i":4,"t":1,"dh":21.5,"rs":9.7,"rn":4,"ts":21.5,"tn":4,"sm":1,"sx":3,"sr":1,"sc":3},{"i":4,"t":0,"dh":15.8,"rs":5.1,"rn":4,"ts":15.8,"tn":4,"sm":4,"sx":0,"sr":0,"sc":0}],"VIN-S1":[null,null,null,null,null,null,null]},"cat":{"YAR-P1":{"Breakdown / not working":5,"Levelling / jerks":2,"Buttons / display / intercom":2,"Door fault":5},"YAR-P2":{"Levelling / jerks":3,"Buttons / display / intercom":3,"Breakdown / not working":3,"Rusting / corrosion":1,"Door fault":3},"YAR-S1":{"Buttons / display / intercom":3,"Levelling / jerks":3,"Door fault":4,"Breakdown / not working":5,"Rusting / corrosion":1,"Noise / vibration":2},"YUC-P1":{"Door fault":6,"Rusting / corrosion":1,"Breakdown / not working":4,"Noise / vibration":2,"Buttons / display / intercom":1,"Levelling / jerks":1},"YUC-P2":{"Rusting / corrosion":2,"Buttons / display / intercom":2,"Door fault":3,"Breakdown / not working":2,"Noise / vibration":2,"Levelling / jerks":2},"VIN-P2":{"Door fault":4,"Noise / vibration":1,"Levelling / jerks":3,"Rusting / corrosion":3,"Breakdown / not working":2}},"br":[{"m":"2026-09","d":"2026-09-04","lift":"YUC-P1","miss":"Response","late":1.2,"act":"Not yet actioned"},{"m":"2026-08","d":"2026-08-25","lift":"VIN-P2","miss":"Response","late":0.5,"act":"Written escalation to TKE"},{"m":"2026-08","d":"2026-08-19","lift":"VIN-P2","miss":"Response","late":0.9,"act":"Not yet actioned"},{"m":"2026-08","d":"2026-08-02","lift":"VIN-P2","miss":"Response","late":0.4,"act":"Not yet actioned"},{"m":"2026-07","d":"2026-07-24","lift":"YUC-P1","miss":"Response","late":0.0,"act":"Raised with TKE service team"},{"m":"2026-07","d":"2026-07-21","lift":"YAR-S1","miss":"Response","late":0.2,"act":"Written escalation to TKE"},{"m":"2026-07","d":"2026-07-18","lift":"VIN-P2","miss":"Response","late":0.6,"act":"Written escalation to TKE"},{"m":"2026-07","d":"2026-07-16","lift":"VIN-P2","miss":"Response","late":0.5,"act":"Raised with TKE service team"},{"m":"2026-07","d":"2026-07-16","lift":"VIN-P2","miss":"Response","late":0.9,"act":"Raised with TKE service team"},{"m":"2026-06","d":"2026-06-17","lift":"YAR-S1","miss":"Response","late":0.4,"act":"Written escalation to TKE"},{"m":"2026-06","d":"2026-06-16","lift":"YAR-S1","miss":"Response and repair","late":0.7,"act":"Raised with TKE service team"},{"m":"2026-06","d":"2026-06-13","lift":"YUC-P2","miss":"Response","late":0.3,"act":"Written escalation to TKE"},{"m":"2026-06","d":"2026-06-13","lift":"VIN-P2","miss":"Response and repair","late":2.6,"act":"Raised with TKE service team"},{"m":"2026-06","d":"2026-06-11","lift":"YAR-P2","miss":"Response","late":0.5,"act":"TKE explanation accepted"},{"m":"2026-06","d":"2026-06-09","lift":"YUC-P2","miss":"Response and repair","late":1.0,"act":"Penalty / deduction applied"},{"m":"2026-06","d":"2026-06-09","lift":"VIN-P2","miss":"Response","late":1.0,"act":"Raised with TKE service team"},{"m":"2026-06","d":"2026-06-04","lift":"YUC-P1","miss":"Response","late":0.9,"act":"Written escalation to TKE"},{"m":"2026-06","d":"2026-06-03","lift":"YAR-S1","miss":"Response and repair","late":0.6,"act":"Raised with TKE service team"},{"m":"2026-06","d":"2026-06-01","lift":"YUC-P1","miss":"Response","late":0.7,"act":"TKE explanation accepted"},{"m":"2026-05","d":"2026-05-26","lift":"YAR-S1","miss":"Repair","late":2.0,"act":"Raised with TKE service team"},{"m":"2026-05","d":"2026-05-23","lift":"YUC-P1","miss":"Repair","late":1.0,"act":"Written escalation to TKE"},{"m":"2026-05","d":"2026-05-23","lift":"YUC-P1","miss":"Response and repair","late":1.6,"act":"Raised with TKE service team"},{"m":"2026-05","d":"2026-05-21","lift":"YAR-P2","miss":"Response and repair","late":1.0,"act":"Raised with TKE service team"},{"m":"2026-05","d":"2026-05-16","lift":"YUC-P1","miss":"Response","late":0.1,"act":"Penalty / deduction applied"},{"m":"2026-05","d":"2026-05-15","lift":"YUC-P2","miss":"Response and repair","late":2.7,"act":"Raised with TKE service team"},{"m":"2026-05","d":"2026-05-13","lift":"YUC-P1","miss":"Response","late":1.1,"act":"Penalty / deduction applied"},{"m":"2026-05","d":"2026-05-11","lift":"YAR-S1","miss":"Response and repair","late":0.8,"act":"Written escalation to TKE"},{"m":"2026-05","d":"2026-05-09","lift":"YAR-S1","miss":"Response and repair","late":1.9,"act":"Penalty / deduction applied"},{"m":"2026-05","d":"2026-05-09","lift":"YAR-S1","miss":"Response","late":0.7,"act":"Penalty / deduction applied"},{"m":"2026-05","d":"2026-05-08","lift":"YAR-P1","miss":"Repair","late":1.8,"act":"Raised with TKE service team"},{"m":"2026-05","d":"2026-05-07","lift":"YUC-P2","miss":"Response and repair","late":1.1,"act":"Raised with TKE service team"},{"m":"2026-05","d":"2026-05-02","lift":"YUC-P2","miss":"Response","late":0.2,"act":"Written escalation to TKE"},{"m":"2026-04","d":"2026-04-27","lift":"YUC-P2","miss":"Response and repair","late":1.4,"act":"Raised with TKE service team"},{"m":"2026-04","d":"2026-04-27","lift":"YUC-P2","miss":"Response","late":0.2,"act":"Raised with TKE service team"},{"m":"2026-04","d":"2026-04-26","lift":"YAR-S1","miss":"Response and repair","late":1.8,"act":"Written escalation to TKE"},{"m":"2026-04","d":"2026-04-22","lift":"YUC-P2","miss":"Response and repair","late":2.7,"act":"Written escalation to TKE"},{"m":"2026-04","d":"2026-04-20","lift":"YUC-P2","miss":"Response and repair","late":2.5,"act":"Penalty / deduction applied"},{"m":"2026-04","d":"2026-04-18","lift":"YUC-P1","miss":"Response","late":1.3,"act":"Written escalation to TKE"},{"m":"2026-04","d":"2026-04-18","lift":"YUC-P1","miss":"Response and repair","late":1.7,"act":"Raised with TKE service team"},{"m":"2026-04","d":"2026-04-17","lift":"YUC-P1","miss":"Repair","late":0.1,"act":"Raised with TKE service team"},{"m":"2026-04","d":"2026-04-16","lift":"YAR-S1","miss":"Response","late":1.1,"act":"Written escalation to TKE"},{"m":"2026-04","d":"2026-04-15","lift":"YAR-S1","miss":"Response and repair","late":1.1,"act":"Written escalation to TKE"},{"m":"2026-04","d":"2026-04-15","lift":"YUC-P1","miss":"Response and repair","late":2.7,"act":"Written escalation to TKE"},{"m":"2026-04","d":"2026-04-11","lift":"YAR-P2","miss":"Response","late":0.2,"act":"TKE explanation accepted"},{"m":"2026-04","d":"2026-04-11","lift":"YAR-S1","miss":"Response and repair","late":5.2,"act":"Written escalation to TKE"},{"m":"2026-04","d":"2026-04-10","lift":"YAR-P1","miss":"Response and repair","late":2.2,"act":"Raised with TKE service team"},{"m":"2026-04","d":"2026-04-10","lift":"YAR-P2","miss":"Response and repair","late":1.3,"act":"Raised with TKE service team"},{"m":"2026-04","d":"2026-04-10","lift":"YUC-P1","miss":"Response","late":0.2,"act":"Written escalation to TKE"},{"m":"2026-04","d":"2026-04-08","lift":"YAR-P1","miss":"Repair","late":2.8,"act":"Raised with TKE service team"},{"m":"2026-04","d":"2026-04-07","lift":"YAR-P2","miss":"Response","late":0.9,"act":"TKE explanation accepted"},{"m":"2026-04","d":"2026-04-05","lift":"YAR-S1","miss":"Response","late":0.5,"act":"Raised with TKE service team"},{"m":"2026-04","d":"2026-04-05","lift":"YUC-P1","miss":"Response and repair","late":1.5,"act":"Written escalation to TKE"},{"m":"2026-04","d":"2026-04-03","lift":"YAR-S1","miss":"Response and repair","late":1.9,"act":"Raised with TKE service team"},{"m":"2026-04","d":"2026-04-02","lift":"YAR-P1","miss":"Response and repair","late":3.5,"act":"Raised with TKE service team"},{"m":"2026-03","d":"2026-03-24","lift":"YAR-P2","miss":"Response and repair","late":1.9,"act":"Raised with TKE service team"},{"m":"2026-03","d":"2026-03-20","lift":"YAR-P1","miss":"Response and repair","late":1.1,"act":"Written escalation to TKE"},{"m":"2026-03","d":"2026-03-20","lift":"YAR-P2","miss":"Response and repair","late":1.3,"act":"TKE explanation accepted"},{"m":"2026-03","d":"2026-03-10","lift":"YAR-P1","miss":"Response and repair","late":0.9,"act":"Raised with TKE service team"},{"m":"2026-03","d":"2026-03-06","lift":"YAR-P1","miss":"Response and repair","late":2.8,"act":"Written escalation to TKE"},{"m":"2026-03","d":"2026-03-06","lift":"YAR-P2","miss":"Response and repair","late":1.6,"act":"TKE explanation accepted"},{"m":"2026-03","d":"2026-03-06","lift":"YAR-P2","miss":"Response and repair","late":2.4,"act":"Written escalation to TKE"},{"m":"2026-03","d":"2026-03-06","lift":"YAR-P2","miss":"Response and repair","late":4.7,"act":"Raised with TKE service team"},{"m":"2026-03","d":"2026-03-02","lift":"YAR-P1","miss":"Response and repair","late":2.1,"act":"Written escalation to TKE"},{"m":"2026-03","d":"2026-03-01","lift":"YAR-P1","miss":"Response and repair","late":1.3,"act":"Raised with TKE service team"}],"w":{"YAR-P1":[0,0,4,1,0,2,1,0,1,0,1,0,0,0,0,0,0,0,0,0,2,0,1,0,0,0,0,0,1],"YAR-P2":[3,2,0,1,2,0,1,0,1,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0],"YAR-S1":[2,1,3,0,1,2,0,2,0,1,1,0,2,0,0,0,0,0,0,0,0,1,0,2],"YUC-P1":[3,0,1,2,1,0,2,0,1,0,1,1,0,1,0,1,0,0,0,0,0,0,1,0,0],"YUC-P2":[4,2,0,1,0,1,1,0,0,1,0,0,0,1,0,0,0,0,1,0,1,0],"VIN-P2":[0,1,1,0,0,0,2,0,1,1,1,1,1,2,0,1,1]},"contractDays":90,"inst":[{"lift":"YAR-P1","start":"2025-12-10","stages":{"dismantled":"2025-12-16","material":"2026-01-04","installed":"2026-02-14","inspected":"2026-02-26"},"commissioned":"2026-03-05","excused":0,"penalty":"Not applicable"},{"lift":"YAR-P2","start":"2025-12-24","stages":{"dismantled":"2025-12-30","material":"2026-01-18","installed":"2026-03-01","inspected":"2026-03-13"},"commissioned":"2026-03-20","excused":0,"penalty":"Not applicable"},{"lift":"YAR-S1","start":"2025-12-01","stages":{"dismantled":"2025-12-11","material":"2026-01-09","installed":"2026-03-12","inspected":"2026-03-30"},"commissioned":"2026-04-10","excused":15,"penalty":"Notice sent to TKE"},{"lift":"YUC-P1","start":"2026-01-06","stages":{"dismantled":"2026-01-12","material":"2026-01-31","installed":"2026-03-14","inspected":"2026-03-26"},"commissioned":"2026-04-02","excused":0,"penalty":"Not applicable"},{"lift":"YUC-P2","start":"2026-01-12","stages":{"dismantled":"2026-01-20","material":"2026-02-11","installed":"2026-04-02","inspected":"2026-04-16"},"commissioned":"2026-04-25","excused":8,"penalty":"Under review"},{"lift":"YUC-S1","start":"2026-05-18","stages":{"dismantled":"2026-05-26","material":"2026-06-17","installed":"2026-08-21","inspected":null},"commissioned":null,"excused":0,"penalty":"Under review"},{"lift":"VIN-P1","start":"2026-07-10","stages":{"dismantled":"2026-07-16","material":"2026-08-07","installed":null,"inspected":null},"commissioned":null,"excused":0,"penalty":null},{"lift":"VIN-P2","start":"2026-02-02","stages":{"dismantled":"2026-02-11","material":"2026-03-10","installed":"2026-05-07","inspected":"2026-05-24"},"commissioned":"2026-06-03","excused":0,"penalty":"Penalty levied"},{"lift":"VIN-S1","start":"2026-08-03","stages":{"dismantled":"2026-08-09","material":null,"installed":null,"inspected":null},"commissioned":null,"excused":0,"penalty":null}]}</script>
+<script>
+(function(){
+const D=JSON.parse(document.getElementById('data').textContent);
+const S={bld:'All',lift:null,range:'all',tf:'all',shown:8,part:'perf',open:null,tv:'cal'};
+const $=id=>document.getElementById(id);
+const MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const asOf=new Date(D.asOf+'T23:59:00');
+const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const multiYear=new Set(D.months.map(k=>k.slice(0,4))).size>1;
+const fmtM=k=>{const[y,m]=k.split('-');return MON[+m-1]+(multiYear?" '"+y.slice(2):'');};
+const fmtD=s=>{const d=new Date(s+'T00:00:00');return d.getDate()+' '+MON[d.getMonth()];};
+const live=D.lifts.filter(l=>l.handover), pend=D.lifts.filter(l=>!l.handover);
+const buildings=[...new Set(D.lifts.map(l=>l.building))];
+const liftName=id=>(D.lifts.find(l=>l.id===id)||{name:id}).name;
+const PENDING='Not yet actioned';
+const isEsc=a=>/escalation|penalty/i.test(a||'');
+
+$('sampleBanner').hidden=!D.sample;
+$('asOf').textContent='As of '+asOf.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+$('footSrc').textContent='Source: the society\'s lift log, maintained by the Lift Committee.';
+
+function monthHours(k,h){const[y,m]=k.split('-').map(Number);let s=new Date(y,m-1,1),e=new Date(y,m,1);const hd=new Date(h+'T00:00:00');if(hd>s)s=hd;if(asOf<e)e=asOf;return Math.max(0,(e-s)/36e5);}
+function selLifts(){ if(S.lift) return live.filter(l=>l.id===S.lift); return live.filter(l=>S.bld==='All'||l.building===S.bld); }
+function idxFor(lifts){ const n=D.months.length; let f=n; lifts.forEach(l=>{const i=D.months.indexOf(l.handover.slice(0,7)); if(i>=0&&i<f)f=i;});
+  const first=S.range==='all'?0:Math.max(0,n-(+S.range)); const st=Math.max(first,f===n?0:f); const o=[]; for(let i=st;i<n;i++)o.push(i); return o; }
+const K=['i','t','dh','rs','rn','ts','tn','sm','sx','sr','sc'];
+function agg(lifts,i){ const a={hrs:0,live:0}; K.forEach(k=>a[k]=0);
+  lifts.forEach(l=>{const r=D.m[l.id]&&D.m[l.id][i]; if(!r)return; a.live++; a.hrs+=monthHours(D.months[i],l.handover); K.forEach(k=>a[k]+=r[k]||0);}); return a; }
+function sum(lifts,idx){ const s={hrs:0}; K.forEach(k=>s[k]=0); idx.forEach(i=>{const a=agg(lifts,i); s.hrs+=a.hrs; K.forEach(k=>s[k]+=a[k]);}); return s; }
+function liftMonths(a){ return a.hrs/730; }
+function rateOver(lifts,idx){ let b=0,lm=0; idx.forEach(i=>{const a=agg(lifts,i); b+=a.i; lm+=liftMonths(a);}); return lm>0?b/lm:null; }
+function trendFor(lifts){ const n=D.months.length, L=[]; for(let i=0;i<n;i++) if(agg(lifts,i).live>0) L.push(i);
+  if(L.length<4) return {cls:'new',label:'Too early to tell'};
+  const e=rateOver(lifts,L.slice(0,3)), l=rateOver(lifts,L.slice(-3)); if(e===null||l===null) return {cls:'new',label:'Too early to tell'};
+  const ch=e>0?(l-e)/e:(l>0?1:0);
+  return {ch,early:e,late:l,...(ch<=-0.25?{cls:'good',label:'Improving'}:ch<0.15?{cls:'warn',label:'Not improving yet'}:{cls:'bad',label:'Getting worse'})}; }
+function brFor(lifts,idx){ const ids=new Set(lifts.map(l=>l.id)), ms=new Set(idx.map(i=>D.months[i])); return D.br.filter(b=>ids.has(b.lift)&&ms.has(b.m)); }
+
+let charts={};
+function baseOpts(){ const line=css('--line'); Chart.defaults.font.family='Barlow,"Segoe UI",Arial,sans-serif'; Chart.defaults.font.size=13; Chart.defaults.color=css('--muted');
+  return {responsive:true,maintainAspectRatio:false,animation:{duration:matchMedia('(prefers-reduced-motion: reduce)').matches?0:450},interaction:{mode:'index',intersect:false},
+    plugins:{legend:{position:'bottom',labels:{boxWidth:12,boxHeight:12,usePointStyle:true}},tooltip:{padding:10}},
+    scales:{x:{grid:{display:false},border:{color:line}},y:{beginAtZero:true,grid:{color:line},border:{display:false},ticks:{precision:0}}}}; }
+function mk(id,cfg){ if(charts[id]) charts[id].destroy(); charts[id]=new Chart($(id),cfg); }
+const pct=(a,b)=>b>0?Math.round(a/b*100):null;
+
+function render(){ renderWeekly(); renderOverviewInst(); if(S.part==='inst'){ renderInst(); renderPerfHero(); return; } renderPerf(); }
+function renderPerfHero(){ const lifts=selLifts(), W=weekStats(lifts), ar=$('arrow');
+  if(!W){ $('bigPct').textContent='–'; ar.style.display='none'; $('indBig').textContent='Not enough weeks yet to show a trend'; $('indSmall').textContent=''; }
+  else { ar.style.display=''; ar.style.transform=W.ch<0?'':'rotate(180deg)'; $('bigPct').textContent=Math.abs(Math.round(W.ch*100));
+    $('indBig').textContent=(W.ch<0?'Fewer':'More')+' issues per lift per week than in the first four weeks after commissioning';
+    $('indSmall').textContent='From '+W.first.toFixed(2)+' to '+W.latest.toFixed(2)+' issues per lift per week (last four weeks).'; }
+  $('indicator').setAttribute('aria-label','After commissioning: '+$('indBig').textContent); }
+function renderPerf(){
+  const lifts=selLifts(), idx=idxFor(lifts), labels=idx.map(i=>fmtM(D.months[i])), A=idx.map(i=>agg(lifts,i)), T=sum(lifts,idx);
+  const bar=css('--bar'),bar2=css('--bar2'),lit=css('--lit'),good=css('--good'),bad=css('--bad'),warn=css('--warn');
+  const period = idx.length? fmtM(D.months[idx[0]])+' to '+fmtM(D.months[idx[idx.length-1]]) : '';
+  const subj = S.lift? liftName(S.lift) : (S.bld==='All'?'all commissioned lifts':'commissioned lifts in '+S.bld);
+  const pendHere = S.lift?[]:pend.filter(l=>S.bld==='All'||l.building===S.bld);
+  $('scopeNote').textContent = 'Covering '+subj+(S.lift?'':' ('+lifts.length+')')+', '+period+'.'+(pendHere.length?' '+pendHere.length+' more '+(pendHere.length>1?'lifts join':'lift joins')+' when commissioned.':'');
+
+  renderPerfHero(); const tr=trendFor(lifts);
+  // KPIs
+  $('kIssues').textContent=T.i; $('kIssuesL').textContent='issues logged in this period';
+  const lm=idx.reduce((s,i)=>s+liftMonths(agg(lifts,i)),0); $('kIssuesD').textContent=lm>0?(T.i/lm).toFixed(1)+' per lift a month':'';
+  $('kAvail').textContent=T.hrs>0?((1-T.dh/T.hrs)*100).toFixed(1)+'%':'–';
+  $('kAvailD').textContent=T.hrs>0?Math.round(T.dh)+' lift-hours lost to breakdowns':'';
+  const sl=T.sm+T.sx; $('kSla').textContent=sl?pct(T.sm,sl)+'%':'–'; $('kSlaD').textContent=sl?T.sx+' of '+sl+' outside commitment':'';
+  let cr=0,cs=0; for(let i=0;i<D.months.length;i++){const a=agg(lifts,i); if(i<=idx[idx.length-1]){cr+=a.sr;cs+=a.sc;}}
+  $('kSnag').textContent=cr?cs+' of '+cr:'–'; $('kSnagD').textContent=cr?(cr-cs)+' still pending':'';
+
+  // verdict + issues chart
+  const v=$('verdict'); v.className='verdict '+(tr.cls==='new'?'':tr.cls); $('vTag').textContent=tr.label;
+  const who=S.lift?liftName(S.lift):(S.bld==='All'?'Across all commissioned lifts':'In '+S.bld);
+  $('vText').textContent=tr.cls==='new'?who+', there are fewer than four months of data so far.':
+    who+', issues per lift went from '+tr.early.toFixed(1)+' a month in the first three months to '+tr.late.toFixed(1)+' in the latest three.'+(tr.cls==='good'?' Performance is improving.':tr.cls==='warn'?' Not yet the improvement expected as new lifts settle in.':' This needs follow-up with TKE.');
+  const multi=lifts.length>1, rate=A.map(a=>{const m=liftMonths(a);return m>0?+(a.i/m).toFixed(2):null;});
+  $('bdSub').textContent=multi?'Bars count issues; red marks incidents where someone was trapped. The line shows issues per lift, which stays fair as more lifts are commissioned.':'Bars count issues for this lift; red marks incidents where someone was trapped.';
+  const ds=[{type:'bar',label:'Issues',data:A.map(a=>a.i-a.t),backgroundColor:bar,borderRadius:4,maxBarThickness:42,order:2,stack:'s'},
+            {type:'bar',label:'Someone trapped',data:A.map(a=>a.t),backgroundColor:bad,borderRadius:4,maxBarThickness:42,order:1,stack:'s'}];
+  if(multi) ds.push({type:'line',label:'Per lift',data:rate,borderColor:lit,backgroundColor:lit,borderWidth:3,pointRadius:4,tension:.3,order:0,yAxisID:'y2'});
+  const bo=baseOpts(); bo.scales.x.stacked=true; bo.scales.y.stacked=true;
+  bo.plugins.tooltip.callbacks={footer:it=>{const a=A[it[0].dataIndex];return 'Total '+a.i+' issues, '+a.live+' lift'+(a.live>1?'s':'')+' in service';}};
+  if(multi) bo.scales.y2={position:'right',beginAtZero:true,grid:{display:false},border:{display:false},ticks:{color:lit},title:{display:true,text:'per lift',color:lit}};
+  mk('cBd',{type:'bar',data:{labels,datasets:ds},options:bo});
+
+  const cc={}; lifts.forEach(l=>{const c=D.cat[l.id]||{};for(const k in c)cc[k]=(cc[k]||0)+c[k];}); const ent=Object.entries(cc).sort((a,b)=>b[1]-a[1]);
+  const co=baseOpts(); co.indexAxis='y'; co.plugins.legend={display:false}; co.scales={x:{beginAtZero:true,grid:{color:css('--line')},border:{display:false},ticks:{precision:0}},y:{grid:{display:false},border:{display:false}}};
+  mk('cCat',{type:'bar',data:{labels:ent.map(e=>e[0]),datasets:[{data:ent.map(e=>e[1]),backgroundColor:ent.map((e,i)=>i===0?lit:bar),borderRadius:4,maxBarThickness:22}]},options:co});
+
+  const av=A.map(a=>a.hrs>0?+((1-a.dh/a.hrs)*100).toFixed(2):null); const mn=Math.min(...av.filter(x=>x!==null),99);
+  const ao=baseOpts(); ao.scales.y={min:Math.max(80,Math.floor(mn-1)),max:100,grid:{color:css('--line')},border:{display:false},ticks:{callback:x=>x+'%'}};
+  ao.plugins.legend={display:false}; ao.plugins.tooltip.callbacks={label:c=>' '+c.parsed.y.toFixed(1)+'% running'};
+  mk('cAvail',{type:'line',data:{labels,datasets:[{data:av,borderColor:good,backgroundColor:good+'22',fill:true,borderWidth:3,pointRadius:4,tension:.3}]},options:ao});
+
+  // SLA
+  const R=D.sla||{}; const parts=[]; if(R.resp) parts.push('reach a reported fault within '+R.resp+' hours'); if(R.rest) parts.push('restore the lift within '+R.rest+' hours');
+  $('slaIntro').textContent=parts.length?'TKE\'s commitment is to '+parts.join(' and ')+'. A complaint counts as missed if either is exceeded.':'Service commitment figures have not been entered yet.';
+  const sb=$('slaBar'); sb.innerHTML=''; if(sl){ const a=document.createElement('span'); a.style.width=(T.sm/sl*100)+'%'; a.style.background=good; const b=document.createElement('span'); b.style.width=(T.sx/sl*100)+'%'; b.style.background=bad; sb.append(a,b); }
+  $('slaBarTxt').textContent=sl?T.sm+' within commitment, '+T.sx+' missed ('+pct(T.sm,sl)+'% met) in this period.':'No complaints in this period.';
+  const so=baseOpts(); so.scales.x.stacked=true; so.scales.y.stacked=true;
+  so.plugins.tooltip.callbacks={footer:it=>{const a=A[it[0].dataIndex],n=a.sm+a.sx;return n?pct(a.sm,n)+'% met':'';}};
+  mk('cSla',{type:'bar',data:{labels,datasets:[{label:'Within commitment',data:A.map(a=>a.sm),backgroundColor:good,borderRadius:4,maxBarThickness:42,stack:'s'},{label:'Missed',data:A.map(a=>a.sx),backgroundColor:bad,borderRadius:4,maxBarThickness:42,stack:'s'}]},options:so});
+  const ro=baseOpts(); ro.scales.y.ticks={callback:x=>x+'h'}; ro.plugins.tooltip.callbacks={label:c=>' '+c.dataset.label+': '+c.parsed.y+' hrs'};
+  const rds=[{label:'Time to respond',data:A.map(a=>a.rn?+(a.rs/a.rn).toFixed(1):null),borderColor:bar,backgroundColor:bar,borderWidth:3,pointRadius:4,tension:.3},
+             {label:'Time to repair',data:A.map(a=>a.tn?+(a.ts/a.tn).toFixed(1):null),borderColor:lit,backgroundColor:lit,borderWidth:3,pointRadius:4,tension:.3}];
+  if(R.resp) rds.push({label:'Response commitment',data:labels.map(()=>R.resp),borderColor:bar,borderDash:[6,5],borderWidth:2,pointRadius:0});
+  if(R.rest) rds.push({label:'Repair commitment',data:labels.map(()=>R.rest),borderColor:lit,borderDash:[6,5],borderWidth:2,pointRadius:0});
+  mk('cResp',{type:'line',data:{labels,datasets:rds},options:ro});
+
+  // actions summary + table
+  const br=brFor(lifts,idx); const byA={}; br.forEach(b=>{const k=b.act||PENDING;byA[k]=(byA[k]||0)+1;});
+  const order=[PENDING,'Raised with TKE service team','Written escalation to TKE','Penalty / deduction applied','TKE explanation accepted'];
+  const keys=[...order.filter(k=>byA[k]),...Object.keys(byA).filter(k=>!order.includes(k))];
+  const ac=$('acts'); ac.innerHTML='';
+  if(!br.length){ const p=document.createElement('p'); p.className='muted'; p.textContent='No missed commitments in this period.'; ac.appendChild(p); }
+  keys.forEach(k=>{const d=document.createElement('div'); d.className='act'+(k===PENDING?' pending':''); d.innerHTML='<div class="num"></div><div class="muted" style="font-size:.9rem"></div>'; d.firstChild.textContent=byA[k]; d.lastChild.textContent=k===PENDING?'Action pending':k; ac.appendChild(d);});
+  renderTable(br);
+  renderSnag(lifts,idx,labels,good,bad);
+  renderLifts();
+}
+function renderTable(br){
+  const f=S.tf, rows=br.filter(b=>f==='all'||(f==='pending'&&(b.act||PENDING)===PENDING)||(f==='escalated'&&isEsc(b.act)));
+  const tb=$('brBody'); tb.innerHTML='';
+  if(!rows.length){ const tr=document.createElement('tr'); const td=document.createElement('td'); td.colSpan=5; td.className='muted'; td.textContent='Nothing to show for this filter.'; tr.appendChild(td); tb.appendChild(tr); }
+  rows.slice(0,S.shown).forEach(b=>{ const tr=document.createElement('tr'); const a=b.act||PENDING;
+    const cells=[fmtD(b.d),liftName(b.lift),b.miss,(+b.late).toFixed(1)+' hrs']; cells.forEach((c,i)=>{const td=document.createElement('td'); td.textContent=c; if(i===3)td.className='late'; tr.appendChild(td);});
+    const td=document.createElement('td'); const p=document.createElement('span'); p.className='pill '+(a===PENDING?'p-pend':isEsc(a)?'p-esc':/accepted/i.test(a)?'p-ok':''); p.textContent=a===PENDING?'Action pending':a; td.appendChild(p); tr.appendChild(td); tb.appendChild(tr); });
+  const mb=$('moreBtn'); mb.hidden=rows.length<=S.shown; mb.textContent='Show more ('+(rows.length-S.shown)+' more)';
+}
+function renderSnag(lifts,idx,labels,good,bad){
+  let cr=0,cs=0; const R=[],C=[]; for(let i=0;i<D.months.length;i++){const a=agg(lifts,i);cr+=a.sr;cs+=a.sc;if(idx.includes(i)){R.push(cr);C.push(cs);}}
+  mk('cSnag',{type:'line',data:{labels,datasets:[{label:'Reported',data:R,borderColor:bad,backgroundColor:bad+'1f',fill:'+1',borderWidth:3,pointRadius:3,tension:.25},{label:'Fixed',data:C,borderColor:good,backgroundColor:good,borderWidth:3,pointRadius:3,tension:.25}]},options:baseOpts()});
+}
+function renderLifts(){
+  const g=$('liftGrid'); g.innerHTML='';
+  const list=D.lifts.filter(l=>S.bld==='All'||l.building===S.bld).sort((x,y)=>(!x.handover)-(!y.handover));
+  list.forEach(l=>{
+    if(!l.handover){ const p=document.createElement('div'); p.className='lift pend'; p.innerHTML='<div class="row"><h3></h3><span class="trend t-new">Not commissioned yet</span></div><p class="muted" style="font-size:.88rem">Joins the report from its commissioning month.</p>'; p.querySelector('h3').textContent=l.name; g.appendChild(p); return; }
+    const t=trendFor([l]), rows=(D.m[l.id]||[]).filter(r=>r), h=new Date(l.handover+'T00:00:00');
+    const tot=rows.reduce((s,r)=>s+r.i,0), sm=rows.reduce((s,r)=>s+r.sm,0), sx=rows.reduce((s,r)=>s+r.sx,0);
+    const b=document.createElement('button'); b.className='lift'; b.setAttribute('aria-pressed',S.lift===l.id);
+    b.innerHTML='<div class="row"><h3></h3><span class="trend t-'+t.cls+'"></span></div><div class="muted since" style="font-size:.88rem"></div><canvas width="400" height="76" aria-hidden="true"></canvas><div class="stats"><span><b class="a"></b> issues</span><span><b class="c"></b> within commitment</span></div>';
+    b.querySelector('h3').textContent=l.name; b.querySelector('.trend').textContent=t.label;
+    b.querySelector('.since').textContent='Commissioned '+MON[h.getMonth()]+' '+h.getFullYear();
+    b.querySelector('.a').textContent=tot; b.querySelector('.c').textContent=(sm+sx)?pct(sm,sm+sx)+'%':'–';
+    b.addEventListener('click',()=>{S.lift=S.lift===l.id?null:l.id; S.shown=8; syncFocus(); render(); if(S.lift) $('secIssues').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});});
+    g.appendChild(b); spark(b.querySelector('canvas'),rows.map(r=>r.i),t.cls);
+  });
+}
+function spark(cv,vals,cls){ const c=cv.getContext('2d'),W=cv.width,H=cv.height; c.clearRect(0,0,W,H); if(!vals.length)return; const mx=Math.max(1,...vals),bw=W/vals.length;
+  vals.forEach((v,i)=>{const h=Math.max(3,(v/mx)*(H-6)); c.fillStyle=i===vals.length-1?css(cls==='good'?'--good':cls==='bad'?'--bad':cls==='warn'?'--warn':'--bar'):css('--bar2'); c.beginPath(); if(c.roundRect)c.roundRect(i*bw+4,H-h,bw-8,h,4); else c.rect(i*bw+4,H-h,bw-8,h); c.fill();}); }
+function syncFocus(){ const on=!!S.lift; $('focusChip').classList.toggle('on',on); if(on) $('focusName').textContent='Showing: '+liftName(S.lift); }
+
+
+// ---------- installation ----------
+const CD=D.contractDays||90; $('cdays').textContent=CD;
+const dayMs=864e5, toD=s=>new Date(s+'T00:00:00'), addDays=(d,n)=>new Date(d.getTime()+n*dayMs);
+const today=new Date(D.asOf+'T00:00:00');
+function instRows(){ const ids=new Set(D.lifts.filter(l=>S.bld==='All'||l.building===S.bld).map(l=>l.id));
+  return (D.inst||[]).filter(x=>ids.has(x.lift)).map(x=>{
+    if(!x.start) return {...x,status:'Not started'};
+    const st=toD(x.start), end=x.commissioned?toD(x.commissioned):today, days=Math.round((end-st)/dayMs);
+    const over=Math.max(0,days-CD), net=Math.max(0,over-(x.excused||0));
+    const status=x.commissioned?(net===0?'Commissioned on time':'Commissioned late'):(net>0?'In progress, overdue':'In progress, on track');
+    return {...x,st,end,days,over,net,target:addDays(st,CD),status};
+  });}
+function instSummary(R){ const com=R.filter(r=>r.commissioned), on=com.filter(r=>r.net===0), late=com.filter(r=>r.net>0), prog=R.filter(r=>r.start&&!r.commissioned), od=prog.filter(r=>r.net>0);
+  return {R,com,on,late,prog,od,avg:com.length?Math.round(com.reduce((s,r)=>s+r.days,0)/com.length):null,net:R.reduce((s,r)=>s+(r.net||0),0),pen:R.filter(r=>r.penalty==='Penalty levied').length}; }
+const fmtFull=d=>d.getDate()+' '+MON[d.getMonth()]+" '"+String(d.getFullYear()).slice(2);
+function renderOverviewInst(){
+  const A=instSummary(instRows());
+  $('ovCom').textContent=A.com.length; $('ovTot').textContent=A.R.length;
+  $('ovInstBig').textContent=A.R.length===1?(A.com.length?'Lift commissioned':'Lift not yet commissioned'):'lifts commissioned';
+  $('ovInstBig').textContent=A.com.length+' of '+A.R.length+' lifts commissioned';
+  $('ovInstSmall').textContent=(A.com.length?A.on.length+' of '+A.com.length+' finished within '+CD+' days. ':'')+(A.prog.length?A.prog.length+' in progress'+(A.od.length?', '+A.od.length+' past '+CD+' days.':', all within '+CD+' days so far.'):'');
+  $('ovInst').setAttribute('aria-label','Installation: '+$('ovInstBig').textContent+'. '+$('ovInstSmall').textContent);
+  return A;
+}
+function renderInst(){
+  const A0=instSummary(instRows()); const firstStart=A0.R.filter(r=>r.st).sort((a,b)=>a.st-b.st)[0];
+  $('scopeNote').textContent='Covering '+(S.bld==='All'?'all '+A0.R.length+' lifts':'the '+A0.R.length+' lifts in '+S.bld)+(firstStart?', from the first work start on '+fmtFull(firstStart.st)+'.':'.');
+  const A=renderOverviewInst(), good=css('--good'), bad=css('--bad'), bar=css('--bar');
+  const v=$('iVerdict'); const cls=!A.com.length?'':A.late.length===0&&A.od.length===0?'good':(A.late.length+A.od.length)<=A.on.length?'warn':'bad';
+  v.className='verdict '+cls; $('iTag').textContent=!A.com.length?'No lift commissioned yet':cls==='good'?'On schedule':cls==='warn'?'Partly delayed':'Mostly delayed';
+  const lateNames=A.late.map(r=>liftName(r.lift)+' ('+r.net+' days late)');
+  $('iText').textContent=(A.com.length?A.on.length+' of '+A.com.length+' commissioned lifts were finished within the '+CD+'-day contract period. ':'')+
+    (lateNames.length?'Late: '+lateNames.join(', ')+'. ':'')+(A.od.length?A.od.map(r=>liftName(r.lift)).join(', ')+(A.od.length>1?' are':' is')+' still in progress and past '+CD+' days.':'');
+  $('iCom').textContent=A.com.length+' of '+A.R.length; $('iComD').textContent=A.prog.length?A.prog.length+' in progress':'';
+  $('iOn').textContent=A.com.length?A.on.length+' of '+A.com.length:'–'; $('iOnD').textContent=A.late.length?A.late.length+' late':'';
+  $('iAvg').textContent=A.avg??'–'; $('iAvgD').textContent='Contract: '+CD+' days';
+  $('iDelay').textContent=A.net; const odDays=A.od.reduce((s,r)=>s+r.net,0); $('iDelayD').textContent=(odDays?odDays+' of these on lifts still in progress. ':'')+(A.pen?A.pen+' lift'+(A.pen>1?'s':'')+' with penalty levied':'No penalty levied yet');
+  // legend
+  $('gLegend').innerHTML='';
+  [[good,'Within '+CD+' days'],[bad,'Beyond '+CD+' days'],['stripe','Still in progress']].forEach(([c,l])=>{const s=document.createElement('span'); const i=document.createElement('i'); if(c==='stripe'){i.style.background=bar;i.className='';i.style.backgroundImage='repeating-linear-gradient(135deg,rgba(255,255,255,.45) 0 3px,transparent 3px 6px)';} else i.style.background=c; s.append(i,l); $('gLegend').appendChild(s);});
+  const tg=document.createElement('span'); tg.innerHTML='<i style="width:3px;background:var(--ink)"></i>'; tg.append(CD+'-day deadline'); $('gLegend').appendChild(tg);
+  const dt=document.createElement('span'); dt.innerHTML='<i style="width:0;border-left:2px dashed var(--muted);border-radius:0"></i>'; dt.append('Today'); $('gLegend').appendChild(dt);
+  // gantt
+  const R=A.R.filter(r=>r.start).sort((a,b)=>a.st-b.st), g=$('gantt'); g.innerHTML='';
+  if(!R.length){ g.innerHTML='<p class="muted">No installation dates recorded yet.</p>'; }
+  else {
+    let t0=new Date(Math.min(...R.map(r=>r.st))), t1=new Date(Math.max(today,...R.map(r=>r.target),...R.map(r=>r.end)));
+    t0=new Date(t0.getFullYear(),t0.getMonth(),1); t1=addDays(t1,10); const span=t1-t0, P=d=>((d-t0)/span*100);
+    const months=[]; for(let d=new Date(t0);d<=t1;d=new Date(d.getFullYear(),d.getMonth()+1,1)) months.push(new Date(d));
+    const ax=document.createElement('div'); ax.className='g-axis'; ax.innerHTML='<span></span><div class="ticks"></div>';
+    const narrow=matchMedia('(max-width:560px)').matches;
+    months.forEach((m,i)=>{ if(narrow&&i%3) return; const s=document.createElement('span'); s.style.left=P(addDays(m,14))+'%'; s.textContent=MON[m.getMonth()]+(m.getMonth()===0||i===0?" '"+String(m.getFullYear()).slice(2):''); ax.lastChild.appendChild(s); });
+    g.appendChild(ax);
+    const stageNames={dismantled:'Old lift dismantled',material:'Material on site',installed:'Installation complete',inspected:'Lift Inspector approval'};
+    R.forEach(r=>{
+      const row=document.createElement('button'); row.className='g-row'; row.setAttribute('aria-expanded',S.open===r.lift);
+      const lab=document.createElement('div'); lab.className='g-label'; const b=document.createElement('b'); b.textContent=liftName(r.lift); const sm=document.createElement('small');
+      sm.className=/late|overdue/.test(r.status)?'t-bad':/on time/.test(r.status)?'t-good':'muted'; sm.textContent=r.status; lab.append(b,sm);
+      const tr=document.createElement('div'); tr.className='g-track';
+      months.forEach(m=>{const gl=document.createElement('div'); gl.className='g-grid'; gl.style.left=P(m)+'%'; tr.appendChild(gl);});
+      const td=document.createElement('div'); td.className='g-today'; td.style.left=P(today)+'%'; tr.appendChild(td);
+      const cut=r.end<r.target?r.end:r.target;
+      const b1=document.createElement('div'); b1.className='g-bar'+(r.commissioned?'':' prog'); b1.style.left=P(r.st)+'%'; b1.style.width=(P(cut)-P(r.st))+'%'; b1.style.backgroundColor=r.commissioned?good:bar;
+      if(r.end>r.target){ b1.style.borderRadius='4px 0 0 4px'; const b2=document.createElement('div'); b2.className='g-bar'+(r.commissioned?'':' prog'); b2.style.left=P(r.target)+'%'; b2.style.width=(P(r.end)-P(r.target))+'%'; b2.style.backgroundColor=bad; b2.style.borderRadius='0 4px 4px 0'; tr.appendChild(b2); }
+      tr.appendChild(b1);
+      const tk=document.createElement('div'); tk.className='g-target'; tk.style.left=P(r.target)+'%'; tk.title=CD+'-day deadline: '+fmtFull(r.target); tr.appendChild(tk);
+      Object.entries(r.stages||{}).forEach(([k,v])=>{ if(!v) return; const d=document.createElement('div'); d.className='g-dot'; d.style.left=P(toD(v))+'%'; d.title=stageNames[k]+': '+fmtFull(toD(v)); tr.appendChild(d); });
+      const det=document.createElement('div'); det.className='g-detail'+(S.open===r.lift?' on':'');
+      const lines=[['Work started',r.st]]; Object.entries(stageNames).forEach(([k,n])=>lines.push([n,r.stages&&r.stages[k]?toD(r.stages[k]):null])); lines.push(['Commissioned',r.commissioned?toD(r.commissioned):null]);
+      const p=document.createElement('p'); p.textContent=r.days+' days '+(r.commissioned?'taken':'so far')+'. Deadline was '+fmtFull(r.target)+'.'+(r.excused?' '+r.excused+' days of delay were accepted as not TKE\'s fault.':'')+(r.net?' Net TKE delay: '+r.net+' days.':'');
+      const ol=document.createElement('ol'); lines.forEach(([n,d])=>{const li=document.createElement('li'); li.textContent=n+': '+(d?fmtFull(d):'pending'); ol.appendChild(li);});
+      det.append(p,ol);
+      row.append(lab,tr); row.addEventListener('click',()=>{S.open=S.open===r.lift?null:r.lift; renderInst();});
+      g.append(row,det);
+    });
+  }
+  // table
+  const tb=$('iBody'); tb.innerHTML='';
+  A.R.slice().sort((a,b)=>(a.st||9e15)-(b.st||9e15)).forEach(r=>{ const trr=document.createElement('tr');
+    const cells=[liftName(r.lift), r.st?fmtFull(r.st):'Not started', r.commissioned?fmtFull(toD(r.commissioned)):(r.start?'In progress':'–'), r.start?r.days+(r.commissioned?'':' so far'):'–', r.start?(r.net?r.net+' days':'None'):'–'];
+    cells.forEach((c,i)=>{const td=document.createElement('td'); td.textContent=c; if(i===4&&r.net) td.className='t-bad'; trr.appendChild(td);});
+    const td=document.createElement('td'); const pen=r.penalty||(r.net?'Not recorded':'Not applicable'); const pl=document.createElement('span'); pl.className='pill '+(pen==='Penalty levied'?'p-esc':/review|Notice|Not recorded/.test(pen)?'p-pend':''); pl.textContent=pen; td.appendChild(pl); trr.appendChild(td); tb.appendChild(trr); });
+}
+function setPart(p){ S.part=p; $('partInst').hidden=p!=='inst'; $('partPerf').hidden=p!=='perf';
+  $('partSeg').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x.dataset.p===p));
+  $('rangeSeg').style.display=p==='perf'?'':'none'; if(p==='perf'){ S.lift=S.lift; } else { S.lift=null; syncFocus(); }
+  render(); }
+$('partSeg').addEventListener('click',e=>{const b=e.target.closest('button'); if(b) setPart(b.dataset.p);});
+$('ovInst').addEventListener('click',()=>{setPart('inst'); $('partInst').scrollIntoView({behavior:'smooth'});});
+$('indicator').addEventListener('click',()=>{setPart('perf'); $('partPerf').scrollIntoView({behavior:'smooth'});});
+
+// ---------- weekly trend (top) ----------
+function weekly(){
+  const L=live.filter(l=>S.bld==='All'||l.building===S.bld);
+  const t0=new Date(Math.min(...L.map(l=>toD(l.handover)))); const nowD=today;
+  const series=L.map(l=>{ const h=toD(l.handover); const full=Math.floor((nowD-h)/dayMs/7); // complete weeks only
+    const w=(D.w&&D.w[l.id])||[]; const arr=[]; for(let a=0;a<full;a++) arr.push(w[a]||0); return {l,h,arr,off:Math.round((h-t0)/dayMs)}; });
+  return {L,t0,series};
+}
+function calWeeks(L){ const t0=new Date(Math.min(...L.map(l=>toD(l.handover))));
+  const series=L.map(l=>{ const h=toD(l.handover), full=Math.floor((today-h)/dayMs/7), w=(D.w&&D.w[l.id])||[]; const arr=[]; for(let a=0;a<full;a++) arr.push(w[a]||0); return {l,arr,off:Math.round((h-t0)/dayMs)}; });
+  const nW=Math.max(0,...series.map(s=>Math.floor(s.off/7)+s.arr.length)); const cN=new Array(nW).fill(0), cD=new Array(nW).fill(0);
+  series.forEach(s=>{const k0=Math.floor(s.off/7); s.arr.forEach((v,a)=>{const k=k0+a; if(k<nW){cN[k]+=v;cD[k]+=1;}});});
+  return {t0,series,cN,cD}; }
+function weekStats(L){ if(!L.length) return null; const {series,cN,cD}=calWeeks(L);
+  let fN=0,fD=0; series.forEach(s=>s.arr.slice(0,4).forEach(v=>{fN+=v;fD++;}));
+  const lN=cN.slice(-4).reduce((a,b)=>a+b,0), lD=cD.slice(-4).reduce((a,b)=>a+b,0);
+  if(fD<4||!lD) return null; const first=fN/fD, latest=lN/lD; return {first,latest,ch:first>0?(latest-first)/first:0}; }
+function roll(num,den,k){ return num.map((_,i)=>{ let n=0,d=0; for(let j=Math.max(0,i-k+1);j<=i;j++){n+=num[j];d+=den[j];} return d>0?n/d:null; }); }
+function renderWeekly(){
+  const {L,t0,series}=weekly(); if(!L.length){ $('ttSum').textContent='No lift has been commissioned yet.'; return; }
+  const lit=css('--lit'),bar2=css('--bar2'),bar=css('--bar'),good=css('--good');
+  // calendar view
+  const nW=Math.max(...series.map(s=>Math.floor((s.off)/7)+s.arr.length));
+  const cN=new Array(nW).fill(0), cD=new Array(nW).fill(0);
+  series.forEach(s=>{ const k0=Math.floor(s.off/7); s.arr.forEach((v,a)=>{ const k=k0+a; if(k<nW){cN[k]+=v; cD[k]+=1;} }); });
+  const cRate=roll(cN,cD,4);
+  // age view
+  const nA=Math.max(...series.map(s=>s.arr.length)); const aN=new Array(nA).fill(0), aD=new Array(nA).fill(0);
+  series.forEach(s=>s.arr.forEach((v,a)=>{aN[a]+=v;aD[a]+=1;}));
+  let lastA=nA; while(lastA>0&&aD[lastA-1]<2) lastA--; // need at least 2 lifts at that age
+  const aRate=roll(aN.slice(0,lastA),aD.slice(0,lastA),4);
+  const WS=weekStats(L); const first=WS?WS.first:null, latest=WS?WS.latest:null, fD=WS?4:0;
+  const where=S.bld==='All'?'across all '+L.length+' commissioned lifts':'across '+S.bld+'\'s '+L.length+' commissioned lift'+(L.length>1?'s':'');
+  const sum=$('ttSum'); sum.innerHTML='';
+  if(first!==null&&latest!==null&&fD>=4){ const ch=first>0?(latest-first)/first:0;
+    const b1=document.createElement('b'); b1.textContent=first.toFixed(2); const b2=document.createElement('b'); b2.textContent=latest.toFixed(2);
+    sum.append('Issues per lift per week, '+where+': ',b1,(L.length>1?' in each lift\'s':' in its')+' first four weeks, ',b2,' over the last four weeks'+(Math.abs(ch)>=0.1?' ('+(ch<0?'down ':'up ')+Math.abs(Math.round(ch*100))+'%).':', about the same.'));
+  } else sum.textContent='Not enough weeks of data yet '+where+'.';
+  const fmtW=d=>d.getDate()+' '+MON[d.getMonth()];
+  const o=baseOpts(); o.plugins.legend={position:'bottom',labels:{boxWidth:12,boxHeight:12,usePointStyle:true}};
+  if(S.tv==='cal'){
+    const labels=cN.map((_,k)=>fmtW(addDays(t0,k*7)));
+    $('ttSub').textContent='Grey bars: issues logged each week. Line: issues per lift per week, averaged over four weeks, so the trend stays fair as more lifts are commissioned.';
+    o.scales.x.ticks={maxRotation:0,autoSkip:true,maxTicksLimit:matchMedia('(max-width:560px)').matches?5:10};
+    o.scales.y2={position:'right',beginAtZero:true,grid:{display:false},border:{display:false},ticks:{color:lit},title:{display:true,text:'per lift',color:lit}};
+    o.plugins.tooltip.callbacks={title:it=>'Week of '+it[0].label,footer:it=>cD[it[0].dataIndex]+' lift'+(cD[it[0].dataIndex]>1?'s':'')+' in service'};
+    mk('cWeek',{type:'bar',data:{labels,datasets:[
+      {type:'line',label:'Per lift (4-week average)',data:cRate.map(v=>v===null?null:+v.toFixed(2)),borderColor:lit,backgroundColor:lit,borderWidth:3.5,pointRadius:0,tension:.35,yAxisID:'y2',order:0},
+      {type:'bar',label:'Issues that week',data:cN,backgroundColor:bar2,borderRadius:3,order:1}]},options:o});
+    $('ttNote').textContent='Current week excluded until complete. Lifts join the line from their commissioning week.';
+  } else {
+    const labels=aRate.map((_,a)=>'Week '+(a+1));
+    $('ttSub').textContent='Each lift lined up from its own commissioning day. The bold line is the average across lifts; faint lines are individual lifts. New lifts usually have teething issues that should settle.';
+    const ds=[{label:'Average per lift (4-week average)',data:aRate.map(v=>v===null?null:+v.toFixed(2)),borderColor:lit,backgroundColor:lit,borderWidth:3.5,pointRadius:0,tension:.35,order:0}];
+    series.forEach(s=>{ const r=roll(s.arr.slice(0,lastA),s.arr.slice(0,lastA).map(()=>1),4); ds.push({label:s.l.name,data:r.map(v=>v===null?null:+v.toFixed(2)),borderColor:bar+'55',borderWidth:1.5,pointRadius:0,tension:.35,order:1}); });
+    o.plugins.legend={display:false}; o.scales.x.ticks={maxRotation:0,autoSkip:true,maxTicksLimit:matchMedia('(max-width:560px)').matches?5:10};
+    const mx=Math.max(...aRate.filter(v=>v!==null)); o.scales.y.ticks={}; o.scales.y.max=Math.ceil(mx*1.6*10)/10; o.scales.y.title={display:true,text:'issues per lift per week'};
+    o.plugins.tooltip={mode:'index',intersect:false,filter:it=>it.datasetIndex===0,callbacks:{footer:it=>aD[it[0].dataIndex]+' lifts have reached this week'}};
+    mk('cWeek',{type:'line',data:{labels,datasets:ds},options:o});
+    $('ttNote').textContent='Shows weeks that at least two lifts have reached.';
+  }
+}
+$('ttSeg').addEventListener('click',e=>{const b=e.target.closest('button'); if(!b)return; S.tv=b.dataset.v; $('ttSeg').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b)); renderWeekly();});
+
+const seg=$('bldSeg'); ['All',...buildings].forEach(bn=>{const b=document.createElement('button'); b.textContent=bn==='All'?'All buildings':bn; b.dataset.b=bn; b.setAttribute('aria-pressed',bn==='All'); seg.appendChild(b);});
+seg.addEventListener('click',e=>{const b=e.target.closest('button'); if(!b)return; S.bld=b.dataset.b; S.lift=null; S.shown=8; seg.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b)); syncFocus(); render();});
+$('rangeSeg').addEventListener('click',e=>{const b=e.target.closest('button'); if(!b)return; S.range=b.dataset.r; S.shown=8; $('rangeSeg').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b)); render();});
+$('tblFilter').addEventListener('click',e=>{const b=e.target.closest('button'); if(!b)return; S.tf=b.dataset.f; S.shown=8; $('tblFilter').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b)); render();});
+$('moreBtn').addEventListener('click',()=>{S.shown+=10; render();});
+$('clearFocus').addEventListener('click',()=>{S.lift=null; syncFocus(); render();});
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change',render);
+new MutationObserver(render).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+setPart('perf'); if(window.Chart) {} else $('vText').textContent='Charts could not load. Check your connection and reopen this page.';
+})();
+</script>
+</body>
+</html>
