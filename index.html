@@ -5,18 +5,18 @@
 <meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>YYV Lift Replacement</title>
-<meta name="description" content="21 breakdowns since Nov 2025; TKE reached 13 of 18 urgent calls on time. Lift-by-lift status, installation delays and TKE's missed promises.">
+<meta name="description" content="73 breakdowns since Nov 2025; TKE reached 13 of 18 urgent calls on time. Lift-by-lift status, installation delays and TKE's missed promises.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="YYV lift replacement">
-<meta property="og:title" content="YYV lifts: 7 of 9 in use (as of 25 Sep 2026)">
-<meta property="og:description" content="21 breakdowns since Nov 2025; TKE reached 13 of 18 urgent calls on time. Lift-by-lift status, installation delays and TKE's missed promises.">
+<meta property="og:title" content="YYV lifts: 7 of 9 in use (as of 26 Sep 2026)">
+<meta property="og:description" content="73 breakdowns since Nov 2025; TKE reached 13 of 18 urgent calls on time. Lift-by-lift status, installation delays and TKE's missed promises.">
 <meta property="og:url" content="https://siddmitr.github.io/yyvlinf/">
-<meta property="og:image" content="https://siddmitr.github.io/yyvlinf/og.png?v=2026-09-25">
-<meta property="og:image:secure_url" content="https://siddmitr.github.io/yyvlinf/og.png?v=2026-09-25">
+<meta property="og:image" content="https://siddmitr.github.io/yyvlinf/og.png?v=2026-09-26">
+<meta property="og:image:secure_url" content="https://siddmitr.github.io/yyvlinf/og.png?v=2026-09-26">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="YYV lifts: 7 of 9 in use (as of 25 Sep 2026)">
+<meta property="og:image:alt" content="YYV lifts: 7 of 9 in use (as of 26 Sep 2026)">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -81,7 +81,7 @@ header{display:flex;justify-content:space-between;align-items:baseline;flex-wrap
 .tile .st{font-size:.85rem;font-weight:600;white-space:nowrap;text-align:right}
 .tile.use{border-left-color:var(--good);background:var(--good-bg)} .tile.use .st{color:var(--good)}
 .tile.work{border-left-color:var(--warn);background:var(--warn-bg)} .tile.work .st{color:var(--warn)}
-.tile.none .st{color:var(--bad)}
+.tile.none .st{color:var(--muted)}
 .tile{flex-direction:column;align-items:stretch;justify-content:flex-start;gap:4px;min-height:104px}
 .tile .rag{margin-top:auto}
 .tile .top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
@@ -89,6 +89,23 @@ header{display:flex;justify-content:space-between;align-items:baseline;flex-wrap
 .tile .rag{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:.8rem;color:var(--muted)}
 .dot{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:5px;vertical-align:-1px;border:1.5px solid transparent}
 .dot.g{background:var(--good)} .dot.a{background:var(--warn)} .dot.r{background:var(--bad)} .dot.n{background:transparent;border-color:var(--idle)}
+.snap{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px}
+@media (max-width:900px){.snap{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.snap{grid-template-columns:1fr}}
+.snapc{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-top:5px solid var(--idle);border-radius:14px;padding:12px 14px;text-decoration:none;color:var(--ink)}
+.snapc:hover{border-color:var(--muted)}
+.snapc.g{border-top-color:var(--good)} .snapc.a{border-top-color:var(--warn)} .snapc.r{border-top-color:var(--bad)}
+.snapc h3{font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.snapc .num{font-size:2.1rem;font-weight:700;line-height:1.1;margin-top:6px;font-variant-numeric:tabular-nums}
+.snapc.g .num{color:var(--good)} .snapc.a .num{color:var(--warn)} .snapc.r .num{color:var(--bad)}
+.snapc .lbl{font-weight:500}
+.snapc ul{list-style:none;padding:0;margin:8px 0 0;font-size:.86rem;color:var(--muted)}
+.snapc li{margin-top:3px}
+.snapc .go{margin-top:auto;padding-top:8px;font-size:.82rem;font-weight:600;text-decoration:underline}
+.snapc .segs{margin:8px 0 2px}
+.cline{font-size:.86rem;color:var(--muted);margin-top:6px}
+.rag{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:.8rem;color:var(--muted);margin-top:4px}
+.dotkey{margin-top:10px}.dotkey summary{cursor:pointer;font-size:.9rem;font-weight:600;color:var(--ink)}
 .raglegend{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-top:10px;font-size:.86rem;display:grid;grid-template-columns:1fr 1fr;gap:6px 18px}
 @media (max-width:640px){.raglegend{grid-template-columns:1fr}}
 .raglegend b{display:block;margin-bottom:2px;font-weight:600;color:var(--ink)}
@@ -117,7 +134,7 @@ a.fact{display:block;text-decoration:none;color:var(--ink)} a.fact:hover{border-
 .card-h{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
 .card-h small{display:block;color:var(--muted);font-size:.84rem}
 .chip{font-size:.82rem;font-weight:600;padding:2px 10px;border-radius:99px;white-space:nowrap}
-.chip.use{background:var(--good-bg);color:var(--good)} .chip.work{background:var(--warn-bg);color:var(--warn)} .chip.none{background:var(--bad-bg);color:var(--bad)}
+.chip.use{background:var(--good-bg);color:var(--good)} .chip.work{background:var(--warn-bg);color:var(--warn)} .chip.none{background:var(--idle-bg);color:var(--muted)}
 .kv{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;font-size:.92rem}
 .kv dt{color:var(--muted)} .kv dd{margin:0}
 .late{color:var(--bad);font-weight:600}
@@ -136,6 +153,13 @@ a.fact{display:block;text-decoration:none;color:var(--ink)} a.fact:hover{border-
 .blk.part{outline:1.5px dashed var(--muted);outline-offset:-1.5px}
 .blk .tr{position:absolute;top:-3px;right:-3px;width:10px;height:10px;border-radius:50%;background:var(--bad);border:2px solid var(--surface)}
 .blk .nf{position:absolute;bottom:-3px;right:-3px;min-width:12px;height:12px;border-radius:6px;background:var(--idle);color:#fff;font:600 .58rem/12px Barlow,sans-serif;padding:0 2px;border:1.5px solid var(--surface)}
+.card.mini{padding:10px 14px}
+.mini-row{display:flex;flex-wrap:wrap;align-items:center;gap:4px 14px}
+.mini-row .chip{order:3;margin-left:auto}
+.mini-row .mini-sub{order:2;color:var(--muted);font-size:.86rem}
+.mini-row .mini-txt{order:4;flex-basis:100%;color:var(--muted);font-size:.92rem}
+@media (min-width:700px){.mini-row .mini-txt{flex:1;flex-basis:auto;order:3}.mini-row .chip{order:5}}
+.cbody,.cl,.cr{display:flex;flex-direction:column;gap:10px}
 .card .sum{font-size:.9rem;color:var(--muted)}
 .card .sum b{color:var(--ink);font-weight:600}
 .keyrow{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:.84rem;color:var(--muted);margin-top:4px}
@@ -185,6 +209,135 @@ a.fact{display:block;text-decoration:none;color:var(--ink)} a.fact:hover{border-
 .promise li{margin:4px 0}
 footer{margin-top:40px;padding-top:14px;border-top:1px solid var(--line);font-size:.9rem;color:var(--muted)}
 footer p+p{margin-top:6px}
+
+/* ---- big screens (desktop / projector): use the width, larger type; phones keep the stacked layout ---- */
+@media (min-width:1200px){
+  .wrap{max-width:1440px;padding:28px 32px 56px}
+  body{font-size:17px}
+  h1{font-size:2rem} h2{font-size:1.65rem}
+  .snapc .num{font-size:2.6rem} .snapc .lbl{font-size:1.08rem} .snapc ul{font-size:.95rem}
+  /* lift cards: one per row, sized to fit one screen, big type for presenting */
+  html{scroll-snap-type:y proximity}
+  #lifts .cards{grid-template-columns:1fr;gap:22px}
+  #lifts .bgroup{margin-top:30px}
+  #lifts .bgroup>h3{font-size:1.6rem;margin-bottom:12px}
+  #lifts .card{min-height:calc(100vh - 48px);padding:28px 34px;gap:16px;border-radius:18px;scroll-snap-align:start;scroll-margin-top:24px}
+  #lifts .card-h h3{font-size:2.3rem;line-height:1.15}
+  #lifts .card-h small{font-size:1.15rem}
+  #lifts .chip{font-size:1.15rem;padding:5px 16px}
+  #lifts .cline{font-size:1.35rem;color:var(--ink)}
+  #lifts .rag{font-size:1.15rem;gap:8px 24px}
+  #lifts .rag .dot{width:15px;height:15px}
+  #lifts .cbody{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:40px;align-items:start;margin-top:6px}
+  #lifts .kv{font-size:1.3rem;gap:8px 22px}
+  #lifts .card .note{font-size:1.1rem}
+  #lifts .card .sum{font-size:1.2rem}
+  #lifts .blk-h{font-size:1.2rem}
+  #lifts .blk{width:56px;height:60px;font-size:1.5rem;border-radius:9px}
+  #lifts .blk small{font-size:.75rem}
+  #lifts .blocks{gap:8px}
+  #lifts .minitl{height:28px}
+  #lifts .tlcap{font-size:1rem}
+}
+@media (min-width:1700px){
+  .wrap{max-width:1720px}
+  body{font-size:18px}
+  #lifts .card{padding:36px 44px;gap:22px}
+  #lifts .card-h h3{font-size:3rem}
+  #lifts .card-h small{font-size:1.3rem}
+  #lifts .chip{font-size:1.3rem}
+  #lifts .cline{font-size:1.75rem}
+  #lifts .rag{font-size:1.35rem}
+  #lifts .kv{font-size:1.65rem;gap:12px 26px}
+  #lifts .card .sum,#lifts .card .note{font-size:1.35rem}
+  #lifts .blk-h{font-size:1.4rem}
+  #lifts .blk{width:78px;height:82px;font-size:2rem}
+  #lifts .blk small{font-size:.8rem}
+  #lifts .minitl{height:34px}
+  #lifts .tlcap{font-size:1.15rem}
+}
+@media (min-width:1200px){
+  #lifts .card.mini{min-height:0;padding:16px 34px;gap:0;scroll-snap-align:none}
+  #lifts .card.mini h3{font-size:1.5rem}
+  #lifts .card.mini .mini-sub{font-size:1.05rem}
+  #lifts .card.mini .mini-txt{font-size:1.2rem}
+  #lifts .card.mini .chip{font-size:1.05rem}
+}
+.howbtn{display:none}
+dialog.how{border:0;border-radius:20px;padding:0;width:min(1280px,94vw);max-height:92vh;background:var(--surface);color:var(--ink);box-shadow:0 20px 60px rgba(0,0,0,.35)}
+dialog.how::backdrop{background:rgba(10,20,30,.55)}
+.how-h{display:flex;justify-content:space-between;align-items:center;padding:26px 34px 0}
+.how-h h2{font-size:2rem;margin:0}
+.how-x{border:0;background:var(--idle-bg);color:var(--ink);width:44px;height:44px;border-radius:50%;font-size:1.8rem;line-height:1;cursor:pointer}
+.how-intro{padding:6px 34px 0;font-size:1.2rem;color:var(--muted)}
+.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding:20px 34px}
+.how-c{border:1px solid var(--line);border-radius:16px;padding:18px 20px}
+.how-c h3{font-size:1.45rem;display:flex;align-items:center;gap:10px}
+.how-c .q{font-size:1.1rem;color:var(--muted);margin:8px 0 12px}
+.how-c ul{list-style:none;margin:0;padding:0}
+.how-c li{display:flex;gap:10px;align-items:flex-start;font-size:1.12rem;margin-top:10px;line-height:1.35}
+.how-c li .dot{width:16px;height:16px;margin-top:4px;flex:none}
+.how-foot{display:flex;flex-wrap:wrap;gap:10px 26px;align-items:center;padding:4px 34px 28px;font-size:1.05rem;color:var(--muted)}
+.how-foot b{color:var(--ink);font-weight:600}
+.how-foot .bx{display:inline-flex;align-items:center;gap:8px}
+.how-foot .bx i{display:inline-block;width:26px;height:28px;border-radius:6px}
+.rag .howmini{display:none}
+@media (min-width:1200px){
+  .howbtn{display:inline-flex;align-items:center;gap:8px;margin-top:12px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-size:1.1rem;font-weight:600;padding:10px 18px;border-radius:999px;cursor:pointer}
+  .howbtn::before{content:"i";display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--ink);color:var(--surface);font-size:.9rem;font-style:italic;font-weight:700}
+  .howbtn:hover{border-color:var(--muted)}
+  #lifts .dotkey,#lifts #blkKey{display:none}
+  .rag .howmini{display:inline;border:0;background:none;color:var(--muted);font:inherit;text-decoration:underline;cursor:pointer;padding:0}
+}
+@media (max-width:1199px){dialog.how .how-grid{grid-template-columns:1fr}}
+
+/* ---- missed promises board ---- */
+.mp-prog{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-top:12px}
+.mp-prog .t{display:flex;flex-wrap:wrap;gap:4px 18px;align-items:baseline}
+.mp-prog .t b{font-size:1.5rem;font-weight:700}
+.mp-prog .t span{color:var(--muted)}
+.mp-bar{display:flex;height:14px;border-radius:7px;overflow:hidden;background:var(--idle-bg);margin-top:10px}
+.mp-bar i{display:block}
+.mp-bar .g{background:var(--good)} .mp-bar .a{background:var(--warn)} .mp-bar .n{background:var(--idle)}
+.mp-leg{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:.85rem;color:var(--muted);margin-top:6px}
+.mp-leg i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:0}
+.mp-grid{display:grid;grid-template-columns:170px repeat(var(--cols),1fr);gap:8px;margin-top:12px}
+.mp-ch{font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:4px 2px;display:flex;align-items:center;gap:6px}
+.mp-rh{display:flex;flex-direction:column;justify-content:center;gap:2px;padding:10px 12px;background:var(--surface);border:1px solid var(--line);border-radius:12px}
+.mp-rh b{font-weight:600;display:flex;align-items:center;gap:8px}
+.mp-rh b svg{flex:none}
+.mp-rh span{font-size:.82rem;color:var(--muted)}
+.mp-cell{display:flex;flex-wrap:wrap;align-content:flex-start;gap:8px;min-height:64px;padding:8px;border-radius:12px;background:var(--idle-bg)}
+.mp-cell.c3{background:var(--bad-bg)} .mp-cell.c2{background:color-mix(in srgb,var(--bad-bg) 55%,var(--surface))} .mp-cell.c1{background:var(--warn-bg)}
+.mp-cell .none{font-size:.82rem;color:var(--muted);align-self:center;padding:0 4px}
+.mpt{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;gap:1px;min-width:132px;flex:1 1 132px;max-width:230px;background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--warn);border-radius:10px;padding:7px 10px;font-size:.86rem;color:var(--muted)}
+.mpt.s3{border-left-color:var(--bad);border-left-width:7px} .mpt.s2{border-left-color:var(--bad)} .mpt.s1{border-left-color:var(--warn)} .mpt.s0{border-left-color:var(--idle)}
+.mpt:hover,.mpt:focus-visible{outline:2px solid var(--ink);outline-offset:1px}
+.mpt .lf{color:var(--ink);font-weight:600;font-size:.92rem}
+.mpt .mt{color:var(--bad);font-weight:600}
+.mpt .st{margin-top:3px;font-size:.78rem;font-weight:600;color:var(--warn)}
+.mpt.done{background:var(--good-bg)} .mpt.done .st{color:var(--good)} .mpt.done .mt{color:var(--ink)}
+.mpfull{margin-top:14px} .mpfull>summary{cursor:pointer;font-weight:600}
+dialog.mpd{width:min(900px,94vw)}
+.mpd-body{padding:12px 30px 28px}
+.mpd-body .act{border-left-width:6px;font-size:1.05rem}
+@media (max-width:760px){
+  .mp-grid{grid-template-columns:1fr}
+  .mp-ch{display:none}
+  .mp-rh{margin-top:6px}
+  .mp-cell::before{content:attr(data-sev);display:block;width:100%;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+  .mp-cell.empty{display:none}
+  .mpd-body{padding:8px 14px 18px}
+}
+@media (min-width:1200px){
+  .mp-prog .t b{font-size:2rem} .mp-prog .t span{font-size:1.1rem}
+  .mp-grid{grid-template-columns:220px repeat(var(--cols),1fr);gap:12px}
+  .mp-ch{font-size:1rem}
+  .mp-rh b{font-size:1.15rem} .mp-rh span{font-size:.95rem}
+  .mpt{font-size:1rem;padding:10px 12px;min-width:170px;flex-basis:170px;max-width:280px}
+  .mpt .lf{font-size:1.08rem}
+  .mpt .st{font-size:.88rem}
+}
 </style>
 </head>
 <body>
@@ -194,30 +347,20 @@ footer p+p{margin-top:6px}
     <span class="muted" id="asOf"></span>
   </header>
   <nav class="nav" aria-label="Sections">
-    <a href="#status">Project status</a><a href="#inuse">Since in use</a><a href="#lifts">Lift by lift</a><a href="#done">Action taken</a><a href="#actions">Missed promises</a><a href="#resident">Residents' concerns</a><a href="#promise">What TKE promised</a>
+    <a href="#snapshot">Snapshot</a><a href="#lifts">Lift by lift</a><a href="#done">Action taken</a><a href="#actions">Missed promises</a><a href="#resident">Residents' concerns</a><a href="#promise">What TKE promised</a>
   </nav>
 
-  <section id="status" style="margin-top:8px">
-    <div class="hero" role="region" aria-label="Project status">
-      <div class="big" id="heroBig"></div>
-      <div class="segs" id="segs" aria-hidden="true"></div>
-      <div class="legend" id="segLegend"></div>
-      <p id="heroPlan"></p>
-    </div>
-    <div class="bldgs" id="bldgs"></div>
-    <div class="raglegend" id="ragLegend"></div>
-  </section>
-
-  <section id="inuse">
-    <h2>Since the new lifts came into use</h2>
-    <p class="sec-sub" id="inuseSub"></p>
-    <div class="facts" id="facts"></div>
-    <div class="facts2" id="factsAct"></div>
+  <section id="snapshot" style="margin-top:8px">
+    <h2>Lift project snapshot</h2>
+    <p class="sec-sub" id="snapSub"></p>
+    <div class="snap" id="snap"></div>
   </section>
 
   <section id="lifts">
     <h2>Lift by lift</h2>
     <p class="sec-sub">Installation dates against the contract period of <span class="cdays"></span> days from the day work started (timeline: dashed box = contract period, green = work within it, red = beyond it), and breakdowns in every 30 days since each lift came into use.</p>
+    <button type="button" class="howbtn" data-how>How each lift is measured</button>
+    <details class="dotkey"><summary>What the coloured dots mean</summary><div class="raglegend" id="ragLegend"></div></details>
     <div class="keyrow" id="blkKey"></div>
     <div id="liftGroups"></div>
   </section>
@@ -230,7 +373,9 @@ footer p+p{margin-top:6px}
 
   <section id="actions">
     <h2>When TKE missed its promise: what the society is doing</h2>
-    <p class="sec-sub">The Managing Committee records every time TKE falls short of its contract: late responses, more breakdowns than TKE allows, and late installation. Each one is taken up with TKE, including compensation where it is due. The status of each is shown below and updated as talks progress.</p>
+    <p class="sec-sub">The Managing Committee records every time TKE falls short of its contract and takes it up with TKE, including compensation where it is due. Each tile is one missed promise, placed by how serious it was. Tap a tile for the details.</p>
+    <div id="mpBoard"></div>
+    <details class="mpfull"><summary>Full list with details</summary>
     <div class="claimsum" id="claimSum"></div>
     <div id="sevSum"></div>
     <div class="tabs" id="actTabs">
@@ -240,6 +385,8 @@ footer p+p{margin-top:6px}
       <button data-f="inst" aria-pressed="false">Late installation</button>
     </div>
     <div class="acts" id="acts"></div>
+    </details>
+    <div id="mpStore" hidden></div>
   </section>
 
   <section id="resident">
@@ -259,7 +406,17 @@ footer p+p{margin-top:6px}
   </footer>
 </div>
 
-<script id="data" type="application/json">{"asOf":"2026-09-25","sample":false,"sla":{"a":0.5,"b":4,"bSun":6,"uptime":95.0},"contract":90,"planEnd":"2026-04-20","ra":[{"lift":"YUC-S1","where":null,"raised":null,"concern":"Service lift cabin is too narrow (1000 mm x 2500 mm), and the lift has broken down repeatedly.","action":"TKE to re-install the lift with a larger cabin (1100 mm x 2350 mm). The lift stays in use until the work starts.","by":null,"status":"Planned","target":null,"update":null},{"lift":null,"where":"Stainless-steel rusting (landing doors, all buildings)","raised":"2026-09-24","concern":"Stainless-steel landing doors are rusting within months of installation. It was first seen on doors of passenger lifts in Yucca and Vinca.","action":"The society wrote to TKE (letter YYV/2026/09/216, 24 Sep 2026) asking for the corroded doors to be replaced to the agreed specification. It is asking TKE to trace which batch of steel went into each door and to replace the doors on every lift that uses steel from the same batch, not only the doors that already show rust. It has also asked for a door-by-door inspection report, replacement method, material specification and a floor-by-floor replacement schedule within 7 working days.","by":"Managing Committee (letter signed by the Chairman and Secretary)","status":"In progress","target":null,"update":"24 Sep: TKE acknowledged the letter and proposed to clean the doors first, replacing the steel sheets only if the rust comes back. 25 Sep: the society is replying that cleaning treats the surface, not the cause, and is not acceptable as the fix until the root cause is known. It is asking TKE for the steel's test certificates and batch details for every door, confirmation from the steel maker of any proposed treatment, and a written root-cause report, and has told TKE not to clean or treat the doors until these are reviewed. The society may have the steel tested independently. The 7-working-day deadline in the society's letter still applies."}],"done":[{"date":null,"what":"TKE agreed to extend the warranty by 3 months on each of 3 lifts.","why":"Compensation for delays in installing the lifts.","lifts":"3 lifts, to be assigned to specific lifts to cover their installation delays.","status":"Agreed"}],"claims":{"CALL-1328383":{"status":"Logged","act":null,"raised":null,"reply":null,"comp":null,"amt":null},"CALL-1315063":{"status":"Logged","act":null,"raised":null,"reply":null,"comp":null,"amt":null},"CALL-1259562":{"status":"Logged","act":null,"raised":null,"reply":null,"comp":null,"amt":null},"CALL-1258361":{"status":"Logged","act":null,"raised":null,"reply":null,"comp":null,"amt":null},"CALL-1253949":{"status":"Logged","act":null,"raised":null,"reply":null,"comp":null,"amt":null},"BK-YAR-P2-P2":{"status":"Logged","act":null,"raised":null,"reply":null,"comp":null,"amt":null},"BK-YUC-P1-P5":{"status":"Logged","act":null,"raised":null,"reply":null,"comp":null,"amt":null},"BK-YUC-S1-P8":{"status":"Logged","act":null,"raised":null,"reply":null,"comp":null,"amt":null},"INST-YAR-P1":{"status":"Logged","act":null,"raised":null,"reply":null,"comp":null,"amt":null},"INST-YAR-P2":{"status":"Logged","act":null,"raised":null,"reply":null,"comp":null,"amt":null},"INST-YAR-S1":{"status":"Logged","act":null,"raised":null,"reply":null,"comp":null,"amt":null},"INST-YUC-P1":{"status":"Logged","act":null,"raised":null,"reply":null,"comp":null,"amt":null},"INST-YUC-S1":{"status":"Logged","act":null,"raised":null,"reply":null,"comp":null,"amt":null},"INST-VIN-P1":{"status":"Logged","act":null,"raised":null,"reply":null,"comp":null,"amt":null},"INST-VIN-P2":{"status":"Logged","act":null,"raised":null,"reply":null,"comp":null,"amt":null},"INST-VIN-S1":{"status":"Logged","act":null,"raised":null,"reply":null,"comp":null,"amt":null}},"months":["2025-11","2025-12","2026-01","2026-02","2026-03","2026-04","2026-05","2026-06","2026-07","2026-08","2026-09"],"lifts":[{"id":"YAR-P1","name":"Yarrow Lift 1","building":"Yarrow","job":"7-97-25-M-044","handover":"2026-06-02"},{"id":"YAR-P2","name":"Yarrow Lift 2","building":"Yarrow","job":"7-97-25-M-041","handover":"2025-11-21"},{"id":"YAR-S1","name":"Yarrow Service lift","building":"Yarrow","job":"7-97-25-M-038","handover":null},{"id":"YUC-P1","name":"Yucca Lift 1","building":"Yucca","job":"7-97-25-M-042","handover":"2026-04-03"},{"id":"YUC-P2","name":"Yucca Lift 2","building":"Yucca","job":"7-97-25-M-045","handover":"2026-09-20"},{"id":"YUC-S1","name":"Yucca Service lift","building":"Yucca","job":"7-97-25-M-039","handover":"2025-12-13"},{"id":"VIN-P1","name":"Vinca Lift 1","building":"Vinca","job":"7-97-25-M-043","handover":"2025-11-24"},{"id":"VIN-P2","name":"Vinca Lift 2","building":"Vinca","job":"7-97-25-M-046","handover":"2026-09-07"},{"id":"VIN-S1","name":"Vinca Service lift","building":"Vinca","job":"7-97-25-M-040","handover":null}],"m":{"YAR-P1":[null,null,null,null,null,null,null,{"i":0,"t":0,"dh":0.0,"rs":0.0,"rn":0,"ts":0.0,"tn":0,"sm":0,"sx":0,"sr":0,"sc":0,"n":0},{"i":1,"t":0,"dh":0.0,"rs":1.4,"rn":1,"ts":3.3,"tn":1,"sm":0,"sx":0,"sr":0,"sc":0,"n":0},{"i":0,"t":0,"dh":0.0,"rs":0.0,"rn":0,"ts":0.0,"tn":0,"sm":0,"sx":0,"sr":0,"sc":0,"n":0},{"i":0,"t":0,"dh":0.0,"rs":0.0,"rn":0,"ts":0.0,"tn":0,"sm":0,"sx":0,"sr":0,"sc":0,"n":0}],"YAR-P2":[{"i":0,"t":0,"dh":0.0,"rs":0.0,"rn":0,"ts":0.0,"tn":0,"sm":0,"sx":0,"sr":0,"sc":0,"n":0},{"i":3,"t":1,"dh":29.2,"rs":27.4,"rn":4,"ts":31.5,"tn":4,"sm":1,"sx":2,"sr":0,"sc":0,"n":1},{"i":1,"t":0,"dh":11.0,"rs":7.6,"rn":2,"ts":11.0,"tn":2,"sm":1,"sx":1,"sr":0,"sc":0,"n":1},{"i":0,"t":0,"dh":0.0,"rs":0.0,"rn":0,"ts":0.0,"tn":0,"sm":0,"sx":0,"sr":0,"sc":0,"n":0},{"i":0,"t":0,"dh":0.0,"rs":0.0,"rn":0,"ts":0.0,"tn":0,"sm":0,"sx":0,"sr":0,"sc":0,"n":0},{"i":0,"t":0,"dh":0.0,"rs":0.0,"rn":0,"ts":0.0,"tn":0,"sm":0,"sx":0,"sr":0,"sc":0,"n":0},{"i":1,"t":0,"dh":4.7,"rs":0.2,"rn":1,"ts":4.7,"tn":1,"sm":1,"sx":0,"sr":0,"sc":0,"n":0},{"i":0,"t":0,"dh":0.0,"rs":0.0,"rn":0,"ts":0.0,"tn":0,"sm":0,"sx":0,"sr":0,"sc":0,"n":0},{"i":1,"t":0,"dh":0.0,"rs":0.4,"rn":1,"ts":1.3,"tn":1,"sm":0,"sx":0,"sr":0,"sc":0,"n":0},{"i":0,"t":0,"dh":0.0,"rs":0.0,"rn":0,"ts":0.0,"tn":0,"sm":0,"sx":0,"sr":0,"sc":0,"n":0},{"i":1,"t":0,"dh":5.1,"rs":1.0,"rn":2,"ts":5.1,"tn":2,"sm":2,"sx":0,"sr":0,"sc":0,"n":1}],"YAR-S1":[null,null,null,null,null,null,null,null,null,null,null],"YUC-P1":[null,null,null,null,null,{"i":0,"t":0,"dh":0.0,"rs":0.0,"rn":0,"ts":0.0,"tn":0,"sm":0,"sx":0,"sr":0,"sc":0,"n":0},{"i":0,"t":0,"dh":0.0,"rs":4.8,"rn":1,"ts":4.8,"tn":1,"sm":0,"sx":0,"sr":0,"sc":0,"n":1},{"i":0,"t":0,"dh":0.0,"rs":1.5,"rn":1,"ts":2.7,"tn":1,"sm":0,"sx":0,"sr":0,"sc":0,"n":1},{"i":1,"t":0,"dh":2.8,"rs":1.6,"rn":1,"ts":2.8,"tn":1,"sm":1,"sx":0,"sr":0,"sc":0,"n":0},{"i":2,"t":1,"dh":4.2,"rs":1.4,"rn":2,"ts":4.2,"tn":2,"sm":1,"sx":1,"sr":0,"sc":0,"n":0},{"i":1,"t":0,"dh":0.0,"rs":3.2,"rn":1,"ts":4.1,"tn":1,"sm":0,"sx":0,"sr":0,"sc":0,"n":0}],"YUC-P2":[null,null,null,null,null,null,null,null,null,null,{"i":0,"t":0,"dh":0.0,"rs":0.0,"rn":0,"ts":0.0,"tn":0,"sm":0,"sx":0,"sr":0,"sc":0,"n":0}],"YUC-S1":[null,{"i":0,"t":0,"dh":0.0,"rs":0.0,"rn":0,"ts":0.0,"tn":0,"sm":0,"sx":0,"sr":0,"sc":0,"n":0},{"i":0,"t":0,"dh":0.0,"rs":0.0,"rn":0,"ts":0.0,"tn":0,"sm":0,"sx":0,"sr":0,"sc":0,"n":0},{"i":0,"t":0,"dh":0.0,"rs":0.0,"rn":0,"ts":0.0,"tn":0,"sm":0,"sx":0,"sr":0,"sc":0,"n":0},{"i":0,"t":0,"dh":0.0,"rs":0.0,"rn":0,"ts":0.0,"tn":0,"sm":0,"sx":0,"sr":0,"sc":0,"n":0},{"i":1,"t":0,"dh":1.4,"rs":0.3,"rn":1,"ts":1.4,"tn":1,"sm":1,"sx":0,"sr":0,"sc":0,"n":0},{"i":0,"t":0,"dh":1.9,"rs":0.7,"rn":1,"ts":1.9,"tn":1,"sm":1,"sx":0,"sr":0,"sc":0,"n":1},{"i":1,"t":0,"dh":0.0,"rs":0.6,"rn":1,"ts":2.9,"tn":1,"sm":0,"sx":0,"sr":0,"sc":0,"n":0},{"i":1,"t":0,"dh":1.8,"rs":0.8,"rn":1,"ts":1.8,"tn":1,"sm":1,"sx":0,"sr":0,"sc":0,"n":0},{"i":1,"t":0,"dh":0.0,"rs":1.9,"rn":1,"ts":2.8,"tn":1,"sm":0,"sx":0,"sr":0,"sc":0,"n":0},{"i":1,"t":0,"dh":12.2,"rs":10.0,"rn":1,"ts":12.2,"tn":1,"sm":0,"sx":1,"sr":0,"sc":0,"n":0}],"VIN-P1":[{"i":0,"t":0,"dh":0.0,"rs":0.0,"rn":0,"ts":0.0,"tn":0,"sm":0,"sx":0,"sr":0,"sc":0,"n":0},{"i":2,"t":0,"dh":2.6,"rs":2.6,"rn":2,"ts":7.2,"tn":2,"sm":1,"sx":0,"sr":0,"sc":0,"n":0},{"i":0,"t":0,"dh":0.0,"rs":0.0,"rn":0,"ts":0.0,"tn":0,"sm":0,"sx":0,"sr":0,"sc":0,"n":0},{"i":0,"t":0,"dh":1.8,"rs":0.8,"rn":1,"ts":1.8,"tn":1,"sm":1,"sx":0,"sr":0,"sc":0,"n":1},{"i":0,"t":0,"dh":0.0,"rs":0.0,"rn":0,"ts":0.0,"tn":0,"sm":0,"sx":0,"sr":0,"sc":0,"n":0},{"i":0,"t":0,"dh":0.0,"rs":0.0,"rn":0,"ts":0.0,"tn":0,"sm":0,"sx":0,"sr":0,"sc":0,"n":0},{"i":0,"t":0,"dh":0.0,"rs":4.1,"rn":1,"ts":4.7,"tn":1,"sm":0,"sx":0,"sr":0,"sc":0,"n":1},{"i":1,"t":0,"dh":3.0,"rs":2.3,"rn":1,"ts":3.0,"tn":1,"sm":1,"sx":0,"sr":0,"sc":0,"n":0},{"i":0,"t":0,"dh":0.0,"rs":0.0,"rn":0,"ts":0.0,"tn":0,"sm":0,"sx":0,"sr":0,"sc":0,"n":0},{"i":1,"t":0,"dh":0.0,"rs":1.4,"rn":1,"ts":2.6,"tn":1,"sm":0,"sx":0,"sr":0,"sc":0,"n":0},{"i":0,"t":0,"dh":0.0,"rs":0.7,"rn":1,"ts":1.2,"tn":1,"sm":0,"sx":0,"sr":0,"sc":0,"n":1}],"VIN-P2":[null,null,null,null,null,null,null,null,null,null,{"i":0,"t":0,"dh":0.0,"rs":0.0,"rn":0,"ts":0.0,"tn":0,"sm":0,"sx":0,"sr":0,"sc":0,"n":0}],"VIN-S1":[null,null,null,null,null,null,null,null,null,null,null]},"cat":{"YAR-P2":{"Door fault":3,"Other":3,"Breakdown / not working":1},"VIN-P1":{"Breakdown / not working":2,"Buttons / display / intercom":1,"Other":1},"YUC-S1":{"Door fault":2,"Breakdown / not working":2,"Other":1},"YAR-P1":{"Buttons / display / intercom":1},"YUC-P1":{"Door fault":3,"Breakdown / not working":1}},"br":[{"ref":"CALL-1328383","m":"2026-09","d":"2026-09-23","lift":"YUC-S1","miss":"Stopped-lift response (logged outside 9am-9pm)","late":6.0,"act":"Not yet actioned","t":0,"on":"2026-09-23T22:31","resp":10.02,"limit":4,"sun":false,"nof":0,"fdate":null,"outcome":null},{"ref":"CALL-1315063","m":"2026-08","d":"2026-08-03","lift":"YUC-P1","miss":"Mantrap response","late":0.4,"act":"Not yet actioned","t":1,"on":"2026-08-03T14:52","resp":0.93,"limit":0.5,"sun":false,"nof":0,"fdate":null,"outcome":null},{"ref":"CALL-1259562","m":"2026-01","d":"2026-01-06","lift":"YAR-P2","miss":"Stopped-lift response (logged outside 9am-9pm)","late":0.7,"act":"Not yet actioned","t":0,"on":"2026-01-06T08:20","resp":4.67,"limit":4,"sun":false,"nof":1,"fdate":null,"outcome":null},{"ref":"CALL-1258361","m":"2025-12","d":"2025-12-31","lift":"YAR-P2","miss":"Stopped-lift response (logged outside 9am-9pm)","late":7.1,"act":"Not yet actioned","t":0,"on":"2025-12-31T23:05","resp":11.13,"limit":4,"sun":false,"nof":0,"fdate":null,"outcome":null},{"ref":"CALL-1253949","m":"2025-12","d":"2025-12-13","lift":"YAR-P2","miss":"Mantrap response","late":11.5,"act":"Not yet actioned","t":1,"on":"2025-12-13T22:42","resp":12.03,"limit":0.5,"sun":false,"nof":0,"fdate":null,"outcome":null}],"w":{"YAR-P1":[0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0],"YAR-P2":[0,0,0,1,0,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0],"YUC-P1":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,1,1,0,0,0],"YUC-P2":[0],"YUC-S1":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,1,0,0,0,0,0,0,1],"VIN-P1":[0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0],"VIN-P2":[0,0,0]},"inst":[{"lift":"YAR-P1","start":"2026-02-07","stages":{"dismantled":"2026-02-07","material":null,"installed":"2026-05-25","inspected":"2026-06-02"},"commissioned":"2026-06-02","excused":0,"penalty":null,"phase":2,"pStart":"2026-02-07","pEnd":"2026-05-08","basis":"contract","excReason":"Delay in commissioning due to the PWD operating certificate not being generated, as the PWD service licence issuing portal was down. The lift was ready, but could not be operated until the required PWD licence/certificate was issued."},{"lift":"YAR-P2","start":"2025-06-26","stages":{"dismantled":"2025-06-26","material":null,"installed":"2025-11-21","inspected":"2025-11-28"},"commissioned":"2025-11-21","excused":0,"penalty":null,"phase":1,"pStart":"2025-06-26","pEnd":"2025-09-24","basis":"contract","excReason":"Lift Pit Water Issue: water entering the lift pit from ground level needed extra waterproofing. Lift Shaft Size Checking: detailed shaft-size check during plumb test delayed bracket and rail installation."},{"lift":"YAR-S1","start":null,"stages":{"dismantled":null,"material":null,"installed":null,"inspected":null},"commissioned":null,"excused":0,"penalty":null,"phase":3,"pStart":"2026-01-11","pEnd":"2026-04-20","basis":"phase","excReason":null},{"lift":"YUC-P1","start":"2025-12-23","stages":{"dismantled":"2025-12-23","material":null,"installed":"2026-03-20","inspected":"2026-04-02"},"commissioned":"2026-04-03","excused":0,"penalty":null,"phase":2,"pStart":"2025-12-23","pEnd":"2026-03-23","basis":"contract","excReason":null},{"lift":"YUC-P2","start":"2026-06-25","stages":{"dismantled":"2026-06-25","material":null,"installed":"2026-09-20","inspected":"2026-09-07"},"commissioned":"2026-09-20","excused":0,"penalty":null,"phase":3,"pStart":"2026-06-25","pEnd":"2026-09-23","basis":"contract","excReason":null},{"lift":"YUC-S1","start":"2025-06-30","stages":{"dismantled":"2025-06-30","material":null,"installed":"2025-12-13","inspected":"2025-11-28"},"commissioned":"2025-12-13","excused":0,"penalty":null,"phase":1,"pStart":"2025-06-30","pEnd":"2025-09-28","basis":"contract","excReason":"Residents' concerns over the cabin size (1000 mm x 2500 mm) and repeated breakdowns held up commissioning."},{"lift":"VIN-P1","start":"2025-06-26","stages":{"dismantled":"2025-06-26","material":null,"installed":"2025-11-24","inspected":"2025-11-28"},"commissioned":"2025-11-24","excused":0,"penalty":null,"phase":1,"pStart":"2025-06-26","pEnd":"2025-09-24","basis":"contract","excReason":"Lift Pit Water Issue: water entering the lift pit from ground level needed extra waterproofing. Lift Shaft Size Checking: detailed shaft-size check during plumb test delayed bracket and rail installation."},{"lift":"VIN-P2","start":"2026-06-05","stages":{"dismantled":"2026-06-05","material":null,"installed":"2026-09-07","inspected":"2026-09-07"},"commissioned":"2026-09-07","excused":0,"penalty":null,"phase":3,"pStart":"2026-06-05","pEnd":"2026-09-03","basis":"contract","excReason":null},{"lift":"VIN-S1","start":null,"stages":{"dismantled":null,"material":null,"installed":null,"inspected":null},"commissioned":null,"excused":0,"penalty":null,"phase":2,"pStart":"2025-10-03","pEnd":"2026-01-10","basis":"phase","excReason":null}],"ev":[{"d":"2025-12-13T22:42","l":"YAR-P2","t":1,"n":0,"s":1,"dh":14.1},{"d":"2025-12-14T19:36","l":"VIN-P1","t":0,"n":0,"s":1,"dh":2.6},{"d":"2025-12-15T12:21","l":"YAR-P2","t":0,"n":1,"s":0,"dh":0.0},{"d":"2025-12-27T08:33","l":"VIN-P1","t":0,"n":0,"s":0,"dh":0.0},{"d":"2025-12-29T08:29","l":"YAR-P2","t":0,"n":0,"s":1,"dh":3.3},{"d":"2025-12-31T23:05","l":"YAR-P2","t":0,"n":0,"s":1,"dh":11.8},{"d":"2026-01-06T08:20","l":"YAR-P2","t":0,"n":1,"s":1,"dh":6.9},{"d":"2026-01-07T09:26","l":"YAR-P2","t":0,"n":0,"s":1,"dh":4.1},{"d":"2026-02-08T17:46","l":"VIN-P1","t":0,"n":1,"s":1,"dh":1.8},{"d":"2026-04-04T17:01","l":"YUC-S1","t":0,"n":0,"s":1,"dh":1.4},{"d":"2026-05-06T07:20","l":"YAR-P2","t":0,"n":0,"s":1,"dh":4.7},{"d":"2026-05-11T13:23","l":"YUC-S1","t":0,"n":1,"s":1,"dh":1.9},{"d":"2026-05-31T15:01","l":"YUC-P1","t":0,"n":1,"s":0,"dh":0.0},{"d":"2026-05-31T15:01","l":"VIN-P1","t":0,"n":1,"s":0,"dh":0.0},{"d":"2026-06-16T16:54","l":"YUC-S1","t":0,"n":0,"s":0,"dh":0.0},{"d":"2026-06-18T14:13","l":"YUC-P1","t":0,"n":1,"s":0,"dh":0.0},{"d":"2026-06-19T15:02","l":"VIN-P1","t":0,"n":0,"s":1,"dh":3.0},{"d":"2026-07-06T15:33","l":"YAR-P2","t":0,"n":0,"s":0,"dh":0.0},{"d":"2026-07-13T08:59","l":"YAR-P1","t":0,"n":0,"s":0,"dh":0.0},{"d":"2026-07-17T19:01","l":"YUC-P1","t":0,"n":0,"s":1,"dh":2.8},{"d":"2026-07-20T12:23","l":"YUC-S1","t":0,"n":0,"s":1,"dh":1.8},{"d":"2026-08-03T08:50","l":"YUC-S1","t":0,"n":0,"s":0,"dh":0.0},{"d":"2026-08-03T14:52","l":"YUC-P1","t":1,"n":0,"s":1,"dh":1.8},{"d":"2026-08-09T10:30","l":"VIN-P1","t":0,"n":0,"s":0,"dh":0.0},{"d":"2026-08-28T16:24","l":"YUC-P1","t":0,"n":0,"s":1,"dh":2.4},{"d":"2026-09-05T20:30","l":"VIN-P1","t":0,"n":1,"s":0,"dh":0.0},{"d":"2026-09-06T10:18","l":"YUC-P1","t":0,"n":0,"s":0,"dh":0.0},{"d":"2026-09-08T13:53","l":"YAR-P2","t":0,"n":0,"s":1,"dh":3.7},{"d":"2026-09-11T17:02","l":"YAR-P2","t":0,"n":1,"s":1,"dh":1.4},{"d":"2026-09-23T22:31","l":"YUC-S1","t":0,"n":0,"s":1,"dh":12.2}]}</script>
+<dialog class="how mpd" id="mpDlg" aria-label="Missed promise details">
+  <div class="how-h"><h2 id="mpTitle">Missed promise</h2><button type="button" class="how-x" id="mpClose" aria-label="Close">×</button></div>
+  <div class="mpd-body" id="mpBody"></div>
+</dialog>
+<dialog class="how" id="howDlg" aria-labelledby="howTitle">
+  <div class="how-h"><h2 id="howTitle">How each lift is measured</h2><button type="button" class="how-x" id="howClose" aria-label="Close">×</button></div>
+  <p class="how-intro">Every lift card carries three coloured dots. Each dot checks one thing against what TKE promised.</p>
+  <div class="how-grid" id="howGrid"></div>
+  <div class="how-foot" id="howFoot"></div>
+</dialog>
+<script id="data" type="application/json">{"asOf":"2026-09-26","sample":false,"sla":{"a":0.5,"b":4,"bSun":6,"uptime":95.0},"contract":100,"planEnd":"2026-04-20","ra":[{"lift":"YUC-S1","where":null,"raised":null,"concern":"Service lift cabin is too narrow (1000 mm x 2500 mm), and the lift has broken down repeatedly.","action":"TKE to re-install the lift with a larger cabin (1100 mm x 2350 mm). The lift stays in use until the work starts.","by":null,"status":"Planned","target":null,"update":null},{"lift":null,"where":"Stainless-steel rusting (landing doors, all buildings)","raised":"2026-09-24","concern":"Stainless-steel landing doors are rusting within months of installation. It was first seen on doors of passenger lifts in Yucca and Vinca.","action":"The society wrote to TKE (letter YYV/2026/09/216, 24 Sep 2026) asking for the corroded doors to be replaced to the agreed specification. It is asking TKE to trace which batch of steel went into each door and to replace the doors on every lift that uses steel from the same batch, not only the doors that already show rust. It has also asked for a door-by-door inspection report, replacement method, material specification and a floor-by-floor replacement schedule within 7 working days.","by":"Managing Committee (letter signed by the Chairman and Secretary)","status":"In progress","target":null,"update":"24 Sep: TKE acknowledged the letter and proposed to clean the doors first, replacing the steel sheets only if the rust comes back. 25 Sep: the society is replying that cleaning treats the surface, not the cause, and is not acceptable as the fix until the root cause is known. It is asking TKE for the steel's test certificates and batch details for every door, confirmation from the steel maker of any proposed treatment, and a written root-cause report, and has told TKE not to clean or treat the doors until these are reviewed. The society may have the steel tested independently. The 7-working-day deadline in the society's letter still applies."}],"done":[{"date":null,"what":"TKE agreed to extend the warranty by 3 months on each of the 3 lifts that started first.","why":"Compensation for the delay in installing these lifts.","lifts":"Yarrow Lift 1, Vinca Lift 1 and Yucca service lift.","status":"Agreed"}],"claims":{"CALL-1328383":{"status":"Logged","act":null,"raised":null,"reply":null,"comp":null,"amt":null},"CALL-1315063":{"status":"Logged","act":null,"raised":null,"reply":null,"comp":null,"amt":null},"CALL-1259562":{"status":"Logged","act":null,"raised":null,"reply":null,"comp":null,"amt":null},"CALL-1258361":{"status":"Logged","act":null,"raised":null,"reply":null,"comp":null,"amt":null},"CALL-1253949":{"status":"Logged","act":null,"raised":null,"reply":null,"comp":null,"amt":null},"BK-YAR-P1-P2":{"status":"Logged","act":null,"raised":null,"reply":null,"comp":null,"amt":null},"BK-YUC-P1-P5":{"status":"Logged","act":null,"raised":null,"reply":null,"comp":null,"amt":null},"BK-YUC-S1-P8":{"status":"Logged","act":null,"raised":null,"reply":null,"comp":null,"amt":null},"INST-YAR-P2":{"status":"Logged","act":null,"raised":null,"reply":null,"comp":null,"amt":null},"INST-YAR-P1":{"status":"Settled","act":"Took up the installation delay with TKE and secured compensation.","raised":null,"reply":"TKE agreed to 3 months of extra warranty on this lift.","comp":"Agreed","amt":null},"INST-YAR-S1":{"status":"Closed - no claim","act":null,"raised":null,"reply":null,"comp":null,"amt":null},"INST-YUC-P1":{"status":"Closed - no claim","act":null,"raised":null,"reply":null,"comp":null,"amt":null},"INST-YUC-S1":{"status":"Settled","act":"Took up the installation delay with TKE and secured compensation.","raised":null,"reply":"TKE agreed to 3 months of extra warranty on this lift.","comp":"Agreed","amt":null},"INST-VIN-P1":{"status":"Settled","act":"Took up the installation delay with TKE and secured compensation.","raised":null,"reply":"TKE agreed to 3 months of extra warranty on this lift.","comp":"Agreed","amt":null},"INST-VIN-P2":{"status":"Logged","act":null,"raised":null,"reply":null,"comp":null,"amt":null},"INST-VIN-S1":{"status":"Closed - no claim","act":null,"raised":null,"reply":null,"comp":null,"amt":null},"BK-YUC-P1-P4":{"status":"Logged","act":null,"raised":null,"reply":null,"comp":null,"amt":null},"BK-YUC-P1-P6":{"status":"Logged","act":null,"raised":null,"reply":null,"comp":null,"amt":null},"BK-YUC-S1-P1":{"status":"Logged","act":null,"raised":null,"reply":null,"comp":null,"amt":null},"BK-YUC-S1-P2":{"status":"Logged","act":null,"raised":null,"reply":null,"comp":null,"amt":null},"BK-YUC-S1-P4":{"status":"Logged","act":null,"raised":null,"reply":null,"comp":null,"amt":null},"BK-YUC-S1-P7":{"status":"Logged","act":null,"raised":null,"reply":null,"comp":null,"amt":null},"BK-YUC-S1-P10":{"status":"Logged","act":null,"raised":null,"reply":null,"comp":null,"amt":null}},"months":["2025-11","2025-12","2026-01","2026-02","2026-03","2026-04","2026-05","2026-06","2026-07","2026-08","2026-09"],"lifts":[{"id":"YAR-P1","name":"Yarrow Lift 1","building":"Yarrow","job":"7-97-25-M-041","handover":"2025-11-21"},{"id":"YAR-P2","name":"Yarrow Lift 2","building":"Yarrow","job":"7-97-25-M-044","handover":"2026-06-02"},{"id":"YAR-S1","name":"Yarrow Service lift","building":"Yarrow","job":"7-97-25-M-038","handover":null},{"id":"YUC-P1","name":"Yucca Lift 1","building":"Yucca","job":"7-97-25-M-042","handover":"2026-04-03"},{"id":"YUC-P2","name":"Yucca Lift 2","building":"Yucca","job":"7-97-25-M-045","handover":"2026-09-20"},{"id":"YUC-S1","name":"Yucca Service lift","building":"Yucca","job":"7-97-25-M-039","handover":"2025-12-13"},{"id":"VIN-P1","name":"Vinca Lift 1","building":"Vinca","job":"7-97-25-M-043","handover":"2025-11-24"},{"id":"VIN-P2","name":"Vinca Lift 2","building":"Vinca","job":"7-97-25-M-046","handover":"2026-09-07"},{"id":"VIN-S1","name":"Vinca Service lift","building":"Vinca","job":"7-97-25-M-040","handover":null}],"m":{"YAR-P1":[{"i":0,"t":0,"dh":0.0,"rs":0.0,"rn":0,"ts":0.0,"tn":0,"sm":0,"sx":0,"sr":0,"sc":0,"n":0},{"i":3,"t":1,"dh":29.2,"rs":27.4,"rn":4,"ts":31.5,"tn":4,"sm":1,"sx":2,"sr":0,"sc":0,"n":1},{"i":1,"t":0,"dh":11.0,"rs":7.6,"rn":2,"ts":11.0,"tn":2,"sm":1,"sx":1,"sr":0,"sc":0,"n":1},{"i":0,"t":0,"dh":0.0,"rs":0.0,"rn":0,"ts":0.0,"tn":0,"sm":0,"sx":0,"sr":0,"sc":0,"n":0},{"i":0,"t":0,"dh":0.0,"rs":0.0,"rn":0,"ts":0.0,"tn":0,"sm":0,"sx":0,"sr":0,"sc":0,"n":0},{"i":0,"t":0,"dh":0.0,"rs":0.0,"rn":0,"ts":0.0,"tn":0,"sm":0,"sx":0,"sr":0,"sc":0,"n":0},{"i":1,"t":0,"dh":4.7,"rs":0.2,"rn":1,"ts":4.7,"tn":1,"sm":1,"sx":0,"sr":0,"sc":0,"n":0},{"i":0,"t":0,"dh":0.0,"rs":0.0,"rn":0,"ts":0.0,"tn":0,"sm":0,"sx":0,"sr":0,"sc":0,"n":0},{"i":1,"t":0,"dh":0.0,"rs":0.4,"rn":1,"ts":1.3,"tn":1,"sm":0,"sx":0,"sr":0,"sc":0,"n":0},{"i":0,"t":0,"dh":0.0,"rs":0.0,"rn":0,"ts":0.0,"tn":0,"sm":0,"sx":0,"sr":0,"sc":0,"n":0},{"i":1,"t":0,"dh":5.1,"rs":1.0,"rn":2,"ts":5.1,"tn":2,"sm":2,"sx":0,"sr":0,"sc":0,"n":1}],"YAR-P2":[null,null,null,null,null,null,null,{"i":0,"t":0,"dh":0.0,"rs":0.0,"rn":0,"ts":0.0,"tn":0,"sm":0,"sx":0,"sr":0,"sc":0,"n":0},{"i":1,"t":0,"dh":0.0,"rs":1.4,"rn":1,"ts":3.3,"tn":1,"sm":0,"sx":0,"sr":0,"sc":0,"n":0},{"i":0,"t":0,"dh":0.0,"rs":0.0,"rn":0,"ts":0.0,"tn":0,"sm":0,"sx":0,"sr":0,"sc":0,"n":0},{"i":0,"t":0,"dh":0.0,"rs":0.0,"rn":0,"ts":0.0,"tn":0,"sm":0,"sx":0,"sr":0,"sc":0,"n":0}],"YAR-S1":[null,null,null,null,null,null,null,null,null,null,null],"YUC-P1":[null,null,null,null,null,{"i":0,"t":0,"dh":0.0,"rs":0.0,"rn":0,"ts":0.0,"tn":0,"sm":0,"sx":0,"sr":0,"sc":0,"n":0},{"i":0,"t":0,"dh":0.0,"rs":4.8,"rn":1,"ts":4.8,"tn":1,"sm":0,"sx":0,"sr":0,"sc":0,"n":1},{"i":0,"t":0,"dh":0.0,"rs":1.5,"rn":1,"ts":2.7,"tn":1,"sm":0,"sx":0,"sr":0,"sc":0,"n":1},{"i":3,"t":0,"dh":3.3,"rs":1.7,"rn":3,"ts":3.3,"tn":3,"sm":1,"sx":0,"sr":0,"sc":0,"n":0},{"i":2,"t":1,"dh":4.2,"rs":1.4,"rn":2,"ts":4.2,"tn":2,"sm":1,"sx":1,"sr":0,"sc":0,"n":0},{"i":6,"t":0,"dh":4.0,"rs":4.5,"rn":6,"ts":8.1,"tn":6,"sm":0,"sx":0,"sr":0,"sc":0,"n":0}],"YUC-P2":[null,null,null,null,null,null,null,null,null,null,{"i":1,"t":0,"dh":0.6,"rs":0.2,"rn":1,"ts":0.6,"tn":1,"sm":0,"sx":0,"sr":0,"sc":0,"n":0}],"YUC-S1":[null,{"i":3,"t":0,"dh":6.7,"rs":3.7,"rn":3,"ts":6.7,"tn":3,"sm":0,"sx":0,"sr":0,"sc":0,"n":0},{"i":15,"t":0,"dh":8.9,"rs":4.1,"rn":14,"ts":10.4,"tn":15,"sm":0,"sx":0,"sr":0,"sc":0,"n":0},{"i":2,"t":0,"dh":7.5,"rs":1.7,"rn":2,"ts":7.5,"tn":2,"sm":0,"sx":0,"sr":0,"sc":0,"n":0},{"i":6,"t":0,"dh":4.1,"rs":0.9,"rn":6,"ts":4.1,"tn":6,"sm":0,"sx":0,"sr":0,"sc":0,"n":0},{"i":2,"t":0,"dh":1.6,"rs":0.4,"rn":2,"ts":1.6,"tn":2,"sm":1,"sx":0,"sr":0,"sc":0,"n":0},{"i":0,"t":0,"dh":1.9,"rs":0.7,"rn":1,"ts":1.9,"tn":1,"sm":1,"sx":0,"sr":0,"sc":0,"n":1},{"i":2,"t":0,"dh":0.8,"rs":1.0,"rn":2,"ts":3.6,"tn":2,"sm":0,"sx":0,"sr":0,"sc":0,"n":0},{"i":6,"t":0,"dh":4.3,"rs":1.8,"rn":6,"ts":4.3,"tn":6,"sm":1,"sx":0,"sr":0,"sc":0,"n":0},{"i":2,"t":0,"dh":0.3,"rs":2.1,"rn":2,"ts":3.1,"tn":2,"sm":0,"sx":0,"sr":0,"sc":0,"n":0},{"i":11,"t":0,"dh":27.1,"rs":22.9,"rn":11,"ts":27.1,"tn":11,"sm":0,"sx":1,"sr":0,"sc":0,"n":0}],"VIN-P1":[{"i":0,"t":0,"dh":0.0,"rs":0.0,"rn":0,"ts":0.0,"tn":0,"sm":0,"sx":0,"sr":0,"sc":0,"n":0},{"i":2,"t":0,"dh":2.6,"rs":2.6,"rn":2,"ts":7.2,"tn":2,"sm":1,"sx":0,"sr":0,"sc":0,"n":0},{"i":0,"t":0,"dh":0.0,"rs":0.0,"rn":0,"ts":0.0,"tn":0,"sm":0,"sx":0,"sr":0,"sc":0,"n":0},{"i":0,"t":0,"dh":1.8,"rs":0.8,"rn":1,"ts":1.8,"tn":1,"sm":1,"sx":0,"sr":0,"sc":0,"n":1},{"i":0,"t":0,"dh":0.0,"rs":0.0,"rn":0,"ts":0.0,"tn":0,"sm":0,"sx":0,"sr":0,"sc":0,"n":0},{"i":0,"t":0,"dh":0.0,"rs":0.0,"rn":0,"ts":0.0,"tn":0,"sm":0,"sx":0,"sr":0,"sc":0,"n":0},{"i":0,"t":0,"dh":0.0,"rs":4.1,"rn":1,"ts":4.7,"tn":1,"sm":0,"sx":0,"sr":0,"sc":0,"n":1},{"i":1,"t":0,"dh":3.0,"rs":2.3,"rn":1,"ts":3.0,"tn":1,"sm":1,"sx":0,"sr":0,"sc":0,"n":0},{"i":0,"t":0,"dh":0.0,"rs":0.0,"rn":0,"ts":0.0,"tn":0,"sm":0,"sx":0,"sr":0,"sc":0,"n":0},{"i":1,"t":0,"dh":0.0,"rs":1.4,"rn":1,"ts":2.6,"tn":1,"sm":0,"sx":0,"sr":0,"sc":0,"n":0},{"i":0,"t":0,"dh":0.0,"rs":0.7,"rn":1,"ts":1.2,"tn":1,"sm":0,"sx":0,"sr":0,"sc":0,"n":1}],"VIN-P2":[null,null,null,null,null,null,null,null,null,null,{"i":0,"t":0,"dh":0.0,"rs":0.0,"rn":0,"ts":0.0,"tn":0,"sm":0,"sx":0,"sr":0,"sc":0,"n":0}],"VIN-S1":[null,null,null,null,null,null,null,null,null,null,null]},"cat":{"YAR-P1":{"Door fault":3,"Other":3,"Breakdown / not working":1},"VIN-P1":{"Breakdown / not working":2,"Buttons / display / intercom":1,"Other":1},"YUC-S1":{"Door fault":23,"Breakdown / not working":20,"Other":4,"Noise / vibration":1,"Buttons / display / intercom":1},"YAR-P2":{"Buttons / display / intercom":1},"YUC-P1":{"Door fault":5,"Breakdown / not working":5,"Passenger trapped":1},"YUC-P2":{"Breakdown / not working":1}},"br":[{"ref":"CALL-1328383","m":"2026-09","d":"2026-09-23","lift":"YUC-S1","miss":"Stopped-lift response (logged outside 9am-9pm)","late":6.0,"act":"Not yet actioned","t":0,"on":"2026-09-23T22:31","resp":10.02,"limit":4,"sun":false,"nof":0,"fdate":null,"outcome":null},{"ref":"CALL-1315063","m":"2026-08","d":"2026-08-03","lift":"YUC-P1","miss":"Mantrap response","late":0.4,"act":"Not yet actioned","t":1,"on":"2026-08-03T14:52","resp":0.93,"limit":0.5,"sun":false,"nof":0,"fdate":null,"outcome":null},{"ref":"CALL-1259562","m":"2026-01","d":"2026-01-06","lift":"YAR-P1","miss":"Stopped-lift response (logged outside 9am-9pm)","late":0.7,"act":"Not yet actioned","t":0,"on":"2026-01-06T08:20","resp":4.67,"limit":4,"sun":false,"nof":1,"fdate":null,"outcome":null},{"ref":"CALL-1258361","m":"2025-12","d":"2025-12-31","lift":"YAR-P1","miss":"Stopped-lift response (logged outside 9am-9pm)","late":7.1,"act":"Not yet actioned","t":0,"on":"2025-12-31T23:05","resp":11.13,"limit":4,"sun":false,"nof":0,"fdate":null,"outcome":null},{"ref":"CALL-1253949","m":"2025-12","d":"2025-12-13","lift":"YAR-P1","miss":"Mantrap response","late":11.5,"act":"Not yet actioned","t":1,"on":"2025-12-13T22:42","resp":12.03,"limit":0.5,"sun":false,"nof":0,"fdate":null,"outcome":null}],"w":{"YAR-P1":[0,0,0,1,0,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0],"YAR-P2":[0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0],"YUC-P1":[0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,1,1,0,0,0,1,1,1,3,1],"YUC-P2":[1],"YUC-S1":[0,0,6,3,5,1,3,1,1,0,0,0,2,4,0,1,1,0,0,0,0,0,0,0,0,0,1,1,0,0,3,2,1,1,1,0,0,0,0,4,7,0],"VIN-P1":[0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0],"VIN-P2":[0,0,0]},"inst":[{"lift":"YAR-P1","start":"2025-06-26","stages":{"dismantled":"2025-06-26","material":null,"installed":"2025-11-21","inspected":"2025-11-28"},"commissioned":"2025-11-21","excused":37,"penalty":null,"phase":1,"pStart":"2025-06-26","pEnd":"2025-10-04","basis":"contract","excReason":"Pit water logging needing civil work by YYV (20 days); chamber chipping to create the surface, by YYV (10 days); PWD permission to operate the lift (7 days)."},{"lift":"YAR-P2","start":"2026-02-07","stages":{"dismantled":"2026-02-07","material":null,"installed":"2026-05-25","inspected":"2026-06-02"},"commissioned":"2026-06-02","excused":17,"penalty":null,"phase":2,"pStart":"2026-02-07","pEnd":"2026-05-18","basis":"contract","excReason":"Chamber chipping to create the surface, by YYV (10 days); PWD permission to operate the lift (7 days)."},{"lift":"YAR-S1","start":null,"stages":{"dismantled":null,"material":null,"installed":null,"inspected":null},"commissioned":null,"excused":0,"penalty":null,"phase":3,"pStart":null,"pEnd":null,"basis":null,"excReason":null},{"lift":"YUC-P1","start":"2025-12-23","stages":{"dismantled":"2025-12-23","material":null,"installed":"2026-03-20","inspected":"2026-04-02"},"commissioned":"2026-04-03","excused":1,"penalty":null,"phase":2,"pStart":"2025-12-23","pEnd":"2026-04-02","basis":"contract","excReason":"1-day delay waived by the society."},{"lift":"YUC-P2","start":"2026-06-25","stages":{"dismantled":"2026-06-25","material":null,"installed":"2026-09-20","inspected":"2026-09-07"},"commissioned":"2026-09-20","excused":0,"penalty":null,"phase":3,"pStart":"2026-06-25","pEnd":"2026-10-03","basis":"contract","excReason":null},{"lift":"YUC-S1","start":"2025-06-30","stages":{"dismantled":"2025-06-30","material":null,"installed":"2025-12-13","inspected":"2025-11-28"},"commissioned":"2025-12-13","excused":43,"penalty":null,"phase":1,"pStart":"2025-06-30","pEnd":"2025-10-08","basis":"contract","excReason":"Pit water logging needing civil work by YYV (20 days); commissioning on hold for the cabin-size discussion (23 days)."},{"lift":"VIN-P1","start":"2025-06-26","stages":{"dismantled":"2025-06-26","material":null,"installed":"2025-11-24","inspected":"2025-11-28"},"commissioned":"2025-11-24","excused":20,"penalty":null,"phase":1,"pStart":"2025-06-26","pEnd":"2025-10-04","basis":"contract","excReason":"Pit water logging needing civil work by YYV (20 days)."},{"lift":"VIN-P2","start":"2026-06-05","stages":{"dismantled":"2026-06-05","material":null,"installed":"2026-09-07","inspected":"2026-09-07"},"commissioned":"2026-09-07","excused":10,"penalty":null,"phase":3,"pStart":"2026-06-05","pEnd":"2026-09-13","basis":"contract","excReason":"Chamber chipping to create the surface, by YYV (10 days)."},{"lift":"VIN-S1","start":null,"stages":{"dismantled":null,"material":null,"installed":null,"inspected":null},"commissioned":null,"excused":0,"penalty":null,"phase":2,"pStart":null,"pEnd":null,"basis":null,"excReason":null}],"ev":[{"d":"2025-12-13T22:42","l":"YAR-P1","t":1,"n":0,"s":1,"dh":14.1,"r":0},{"d":"2025-12-14T19:36","l":"VIN-P1","t":0,"n":0,"s":1,"dh":2.6,"r":0},{"d":"2025-12-15T12:21","l":"YAR-P1","t":0,"n":1,"s":0,"dh":0.0,"r":0},{"d":"2025-12-27T08:33","l":"VIN-P1","t":0,"n":0,"s":0,"dh":0.0,"r":0},{"d":"2025-12-29T08:29","l":"YAR-P1","t":0,"n":0,"s":1,"dh":3.3,"r":0},{"d":"2025-12-31T07:30","l":"YUC-S1","t":0,"n":0,"s":1,"dh":4.3,"r":1},{"d":"2025-12-31T15:00","l":"YUC-S1","t":0,"n":0,"s":1,"dh":1.8,"r":1},{"d":"2025-12-31T17:00","l":"YUC-S1","t":0,"n":0,"s":1,"dh":0.6,"r":1},{"d":"2025-12-31T23:05","l":"YAR-P1","t":0,"n":0,"s":1,"dh":11.8,"r":0},{"d":"2026-01-01T01:30","l":"YUC-S1","t":0,"n":0,"s":1,"dh":0.5,"r":1},{"d":"2026-01-01T06:30","l":"YUC-S1","t":0,"n":0,"s":1,"dh":1.4,"r":1},{"d":"2026-01-01T13:55","l":"YUC-S1","t":0,"n":0,"s":1,"dh":1.1,"r":1},{"d":"2026-01-03T08:21","l":"YUC-S1","t":0,"n":0,"s":1,"dh":2.1,"r":1},{"d":"2026-01-06T06:45","l":"YUC-S1","t":0,"n":0,"s":1,"dh":2.2,"r":1},{"d":"2026-01-06T08:20","l":"YAR-P1","t":0,"n":1,"s":1,"dh":6.9,"r":0},{"d":"2026-01-07T09:26","l":"YAR-P1","t":0,"n":0,"s":1,"dh":4.1,"r":0},{"d":"2026-01-09T21:50","l":"YUC-S1","t":0,"n":0,"s":1,"dh":0.3,"r":1},{"d":"2026-01-12T08:20","l":"YUC-S1","t":0,"n":0,"s":1,"dh":0.1,"r":1},{"d":"2026-01-12T11:00","l":"YUC-S1","t":0,"n":0,"s":0,"dh":0.0,"r":1},{"d":"2026-01-13T17:50","l":"YUC-S1","t":0,"n":0,"s":0,"dh":0.0,"r":1},{"d":"2026-01-14T10:25","l":"YUC-S1","t":0,"n":0,"s":1,"dh":0.4,"r":1},{"d":"2026-01-15T12:33","l":"YUC-S1","t":0,"n":0,"s":1,"dh":0.1,"r":1},{"d":"2026-01-19T18:00","l":"YUC-S1","t":0,"n":0,"s":0,"dh":0.0,"r":1},{"d":"2026-01-26T20:25","l":"YUC-S1","t":0,"n":0,"s":0,"dh":0.0,"r":1},{"d":"2026-01-27T09:21","l":"YUC-S1","t":0,"n":0,"s":0,"dh":0.0,"r":1},{"d":"2026-01-27T11:21","l":"YUC-S1","t":0,"n":0,"s":1,"dh":0.7,"r":1},{"d":"2026-02-06T14:30","l":"YUC-S1","t":0,"n":0,"s":1,"dh":7.2,"r":1},{"d":"2026-02-08T17:46","l":"VIN-P1","t":0,"n":1,"s":1,"dh":1.8,"r":0},{"d":"2026-02-10T12:30","l":"YUC-S1","t":0,"n":0,"s":1,"dh":0.2,"r":1},{"d":"2026-03-09T14:10","l":"YUC-S1","t":0,"n":0,"s":1,"dh":0.1,"r":1},{"d":"2026-03-13T10:24","l":"YUC-S1","t":0,"n":0,"s":1,"dh":0.0,"r":1},{"d":"2026-03-18T14:35","l":"YUC-S1","t":0,"n":0,"s":1,"dh":1.1,"r":1},{"d":"2026-03-18T15:50","l":"YUC-S1","t":0,"n":0,"s":1,"dh":1.6,"r":1},{"d":"2026-03-20T13:25","l":"YUC-S1","t":0,"n":0,"s":1,"dh":1.2,"r":1},{"d":"2026-03-20T18:30","l":"YUC-S1","t":0,"n":0,"s":1,"dh":0.1,"r":1},{"d":"2026-04-02T15:35","l":"YUC-S1","t":0,"n":0,"s":1,"dh":0.2,"r":1},{"d":"2026-04-04T17:01","l":"YUC-S1","t":0,"n":0,"s":1,"dh":1.4,"r":0},{"d":"2026-05-06T07:20","l":"YAR-P1","t":0,"n":0,"s":1,"dh":4.7,"r":0},{"d":"2026-05-11T13:23","l":"YUC-S1","t":0,"n":1,"s":1,"dh":1.9,"r":0},{"d":"2026-05-31T15:01","l":"YUC-P1","t":0,"n":1,"s":0,"dh":0.0,"r":0},{"d":"2026-05-31T15:01","l":"VIN-P1","t":0,"n":1,"s":0,"dh":0.0,"r":0},{"d":"2026-06-16T16:54","l":"YUC-S1","t":0,"n":0,"s":0,"dh":0.0,"r":0},{"d":"2026-06-18T14:13","l":"YUC-P1","t":0,"n":1,"s":0,"dh":0.0,"r":0},{"d":"2026-06-19T15:02","l":"VIN-P1","t":0,"n":0,"s":1,"dh":3.0,"r":0},{"d":"2026-06-20T16:49","l":"YUC-S1","t":0,"n":0,"s":1,"dh":0.8,"r":1},{"d":"2026-07-01T13:30","l":"YUC-P1","t":0,"n":0,"s":1,"dh":0.2,"r":1},{"d":"2026-07-06T15:33","l":"YAR-P1","t":0,"n":0,"s":0,"dh":0.0,"r":0},{"d":"2026-07-11T07:06","l":"YUC-S1","t":0,"n":0,"s":1,"dh":0.1,"r":1},{"d":"2026-07-12T11:02","l":"YUC-S1","t":0,"n":0,"s":1,"dh":0.3,"r":1},{"d":"2026-07-13T06:24","l":"YUC-S1","t":0,"n":0,"s":1,"dh":1.1,"r":1},{"d":"2026-07-13T08:59","l":"YAR-P2","t":0,"n":0,"s":0,"dh":0.0,"r":0},{"d":"2026-07-17T19:01","l":"YUC-P1","t":0,"n":0,"s":1,"dh":2.8,"r":0},{"d":"2026-07-20T05:20","l":"YUC-S1","t":0,"n":0,"s":1,"dh":0.4,"r":1},{"d":"2026-07-20T12:23","l":"YUC-S1","t":0,"n":0,"s":1,"dh":1.8,"r":0},{"d":"2026-07-25T00:01","l":"YUC-P1","t":0,"n":0,"s":1,"dh":0.2,"r":1},{"d":"2026-07-30T09:17","l":"YUC-S1","t":0,"n":0,"s":1,"dh":0.5,"r":1},{"d":"2026-08-03T08:50","l":"YUC-S1","t":0,"n":0,"s":0,"dh":0.0,"r":0},{"d":"2026-08-03T14:52","l":"YUC-P1","t":1,"n":0,"s":1,"dh":1.8,"r":0},{"d":"2026-08-09T10:30","l":"VIN-P1","t":0,"n":0,"s":0,"dh":0.0,"r":0},{"d":"2026-08-12T22:40","l":"YUC-S1","t":0,"n":0,"s":1,"dh":0.3,"r":1},{"d":"2026-08-28T16:24","l":"YUC-P1","t":0,"n":0,"s":1,"dh":2.4,"r":0},{"d":"2026-09-05T20:30","l":"VIN-P1","t":0,"n":1,"s":0,"dh":0.0,"r":0},{"d":"2026-09-06T10:18","l":"YUC-P1","t":0,"n":0,"s":0,"dh":0.0,"r":0},{"d":"2026-09-08T13:53","l":"YAR-P1","t":0,"n":0,"s":1,"dh":3.7,"r":0},{"d":"2026-09-11T17:02","l":"YAR-P1","t":0,"n":1,"s":1,"dh":1.4,"r":0},{"d":"2026-09-12T11:04","l":"YUC-P1","t":0,"n":0,"s":1,"dh":2.1,"r":1},{"d":"2026-09-15T22:45","l":"YUC-S1","t":0,"n":0,"s":1,"dh":0.1,"r":1},{"d":"2026-09-17T22:30","l":"YUC-S1","t":0,"n":0,"s":1,"dh":0.2,"r":1},{"d":"2026-09-18T17:00","l":"YUC-S1","t":0,"n":0,"s":1,"dh":0.2,"r":1},{"d":"2026-09-18T21:20","l":"YUC-P1","t":0,"n":0,"s":1,"dh":0.3,"r":1},{"d":"2026-09-18T23:15","l":"YUC-S1","t":0,"n":0,"s":1,"dh":0.1,"r":1},{"d":"2026-09-19T17:00","l":"YUC-P1","t":0,"n":0,"s":1,"dh":1.0,"r":1},{"d":"2026-09-19T20:25","l":"YUC-S1","t":0,"n":0,"s":1,"dh":0.1,"r":1},{"d":"2026-09-19T23:30","l":"YUC-P1","t":0,"n":0,"s":1,"dh":0.4,"r":1},{"d":"2026-09-19T23:45","l":"YUC-S1","t":0,"n":0,"s":1,"dh":0.3,"r":1},{"d":"2026-09-21T22:20","l":"YUC-S1","t":0,"n":0,"s":1,"dh":12.9,"r":1},{"d":"2026-09-23T15:14","l":"YUC-S1","t":0,"n":0,"s":1,"dh":0.4,"r":1},{"d":"2026-09-23T15:14","l":"YUC-S1","t":0,"n":0,"s":1,"dh":0.4,"r":1},{"d":"2026-09-23T15:35","l":"YUC-P2","t":0,"n":0,"s":1,"dh":0.6,"r":1},{"d":"2026-09-23T22:31","l":"YUC-S1","t":0,"n":0,"s":1,"dh":12.2,"r":0},{"d":"2026-09-25T07:45","l":"YUC-P1","t":0,"n":0,"s":1,"dh":0.1,"r":1},{"d":"2026-09-25T18:53","l":"YUC-S1","t":0,"n":0,"s":1,"dh":0.2,"r":1}]}</script>
 <script>
 (function(){
 const D=JSON.parse(document.getElementById('data').textContent);
@@ -273,7 +430,7 @@ const fT=d=>String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padS
 const pl=(n,w,ws)=>n+' '+(n===1?w:(ws||w+'s'));
 const hm=h=>{ if(h==null) return '–'; const m=Math.round(h*60); if(m<60) return m+' min'; const H=Math.floor(m/60), M=m%60; return H+' hr'+(M?' '+M+' min':''); };
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const SIDE={'YAR-P1':'left','YAR-P2':'right','YUC-P1':'right','YUC-P2':'left','VIN-P1':'right','VIN-P2':'left'};
+const SIDE={'YAR-P1':'right','YAR-P2':'left','YUC-P1':'right','YUC-P2':'left','VIN-P1':'right','VIN-P2':'left'};
 const liftOf=id=>D.lifts.find(l=>l.id===id)||{id,name:id,building:''};
 const shortName=l=>l.id.endsWith('S1')?'Service lift':'Lift '+l.id.slice(-1)+(SIDE[l.id]?' ('+SIDE[l.id]+')':'');
 const fullName=l=>l.building+' '+shortName(l);
@@ -301,20 +458,16 @@ const pendingR=r=>r.late>0&&!!r.x.excReason&&!r.x.excused;
 const use=byStatus('use'), work=byStatus('work'), none=byStatus('none');
 const COL={use:'--good',work:'--warn',none:'--idle'};
 
-// ---------- hero ----------
-$('heroBig').innerHTML='<b>'+use.length+'</b> of '+R.length+' lifts in use';
+// ---------- installation summary ----------
 const order=[...use,...work,...none];
-$('segs').innerHTML=order.map(r=>'<span style="background:var('+COL[r.status]+')"></span>').join('');
-$('segLegend').innerHTML=[['use','In use',use.length],['work','Being installed',work.length],['none','Not started',none.length]].filter(a=>a[2]).map(([k,t,n])=>'<span><i style="background:var('+COL[k]+')"></i>'+t+': '+n+'</span>').join('');
 const planEnd=D.planEnd?toD(D.planEnd):null;
 const comLate=use.filter(r=>r.late>0), onTime=use.filter(r=>r.late!=null&&r.late<=0);
 let hp=[];
-const CD=D.contract||90;
+const CD=D.contract||100;
 document.querySelectorAll('.cdays').forEach(e=>e.textContent=CD);
 hp.push('TKE\'s contract gives '+CD+' days to install each lift, counted from the day work starts.');
 if(use.length) hp.push(onTime.length===use.length?'All '+use.length+' lifts in use were ready within that time.':(onTime.length?onTime.length+' of '+use.length+' lifts in use '+(onTime.length===1?'was':'were')+' ready within that time; the rest came in ':'None of the '+use.length+' lifts in use was ready within that time; they came in ')+Math.min(...comLate.map(r=>r.late))+' to '+Math.max(...comLate.map(r=>r.late))+' days late.');
-if(none.length) hp.push(none.map(r=>fullName(r.l)).join(' and ')+(none.length>1?' have':' has')+' not started'+(none.every(r=>r.late>0)?', although TKE\'s own schedule had '+(none.length>1?'them':'it')+' finished by '+fD(new Date(Math.max(...none.map(r=>r.pe))))+'.':'.'));
-$('heroPlan').textContent=hp.join(' ');
+if(none.length) hp.push(none.map(r=>fullName(r.l)).join(' and ')+(none.length>1?' are':' is')+' yet to start installation work.');
 // building tiles with installation / performance dots
 const RAG_I={amberMax:60}, BK_LIMIT=1, MIN_DAYS=30;
 // 30-day periods since in use: breakdowns (excl. no-fault calls) and hours out of service
@@ -329,7 +482,7 @@ function periods(r){
 function ragOf(r){
   let inst;
   if(r.status==='use'){ const nl=netLate(r); inst=r.late==null?{c:'n',t:'no plan date'}:pendingR(r)?{c:'n',t:r.late+' days late, reasons under discussion'}:nl<=0?{c:'g',t:'on time (after accepted delays)'}:nl<=RAG_I.amberMax?{c:'a',t:nl+' days late'}:{c:'r',t:nl+' days late'}; }
-  else inst=r.late>0?{c:'r',t:r.late+' days past '+(r.x.basis==='phase'?'TKE\'s schedule':'the contract period')}:{c:r.status==='work'?'a':'n',t:r.status==='work'?'in progress':'not due yet'};
+  else inst=r.late>0?{c:'r',t:r.late+' days past '+(r.x.basis==='phase'?'TKE\'s schedule':'the contract period')}:{c:r.status==='work'?'a':'n',t:r.status==='work'?'in progress':'yet to start'};
   const svcCalls=(D.m&&D.m[r.l.id]||[]).filter(Boolean).reduce((s,m)=>s+m.sm+m.sx,0);
   const svc=!r.com||!svcCalls?{c:'n',t:'no urgent calls yet'}:r.br.some(b=>b.t)?{c:'r',t:'late when people were trapped'}:r.br.length?{c:'a',t:'late to a stopped lift'}:{c:'g',t:'on time for all urgent calls'};
   if(!r.com) return {inst,health:{c:'n',t:'not in use'},svc};
@@ -341,17 +494,10 @@ function ragOf(r){
 }
 const U=D.sla||{};
 const B=[...new Set(D.lifts.map(l=>l.building))];
-$('bldgs').innerHTML=B.map(b=>'<div class="bldg"><h3>'+esc(b)+'</h3>'+R.filter(r=>r.l.building===b).map(r=>{
-  const st=r.status==='use'?'In use':r.status==='work'?'Being installed':'Not started', g=ragOf(r);
-  let line=r.status==='use'?'Since '+fDs(r.com)+' · '+pl(g.bk,'breakdown')+' · '+(g.up>=99.95?'100':g.up.toFixed(1))+'% running':r.status==='work'?'Started '+fDs(r.st):(r.pe?'Was due '+fDs(r.pe):'');
-  return '<a class="tile '+r.status+'" href="#lift-'+r.l.id+'"><span class="top"><b>'+esc(shortName(r.l))+'</b><span class="st">'+st+'</span></span>'+
-    '<span class="line">'+esc(line)+'</span>'+
-    '<span class="rag"><span title="Installation: '+esc(g.inst.t)+'"><i class="dot '+g.inst.c+'"></i>Installation</span><span title="Lift health: '+esc(g.health.t)+'"><i class="dot '+g.health.c+'"></i>Lift health</span><span title="TKE service: '+esc(g.svc.t)+'"><i class="dot '+g.svc.c+'"></i>TKE service</span></span></a>';
-}).join('')+'</div>').join('');
-$('ragLegend').innerHTML='<div><b>Installation</b> (against the '+(D.contract||90)+'-day contract period)'+
-  '<p><i class="dot g"></i>In use within '+(D.contract||90)+' days of work starting</p>'+
+$('ragLegend').innerHTML='<div><b>Installation</b> (against the '+(D.contract||100)+'-day contract period)'+
+  '<p><i class="dot g"></i>In use within '+(D.contract||100)+' days of work starting</p>'+
   '<p><i class="dot a"></i>Up to '+RAG_I.amberMax+' days late, or being installed</p>'+
-  '<p><i class="dot r"></i>More than '+RAG_I.amberMax+' days late, or not started after TKE\'s scheduled finish</p></div>'+
+  '<p><i class="dot r"></i>More than '+RAG_I.amberMax+' days late</p></div>'+
   '<div><b>Lift health</b> (breakdowns and running time, in each 30 days since in use)'+
   '<p><i class="dot g"></i>Never more than '+BK_LIMIT+' breakdown in 30 days (TKE\'s limit)</p>'+
   '<p><i class="dot a"></i>Over the limit in one 30-day period</p>'+
@@ -360,7 +506,7 @@ $('ragLegend').innerHTML='<div><b>Installation</b> (against the '+(D.contract||9
   '<p><i class="dot g"></i>On time for every trapped or stopped-lift call</p>'+
   '<p><i class="dot a"></i>Late to a stopped lift</p>'+
   '<p><i class="dot r"></i>Late when people were trapped</p></div>'+
-  '<div><b>Hollow dot</b><p><i class="dot n"></i>Not enough to judge yet: not in use, in use under '+MIN_DAYS+' days, no urgent calls, or reasons for an installation delay still under discussion</p></div>';
+  '<div><b>Hollow dot</b><p><i class="dot n"></i>Not enough to judge yet: yet to start, not in use, in use under '+MIN_DAYS+' days, no urgent calls, or reasons for an installation delay still under discussion</p></div>';
 
 // ---------- since in use ----------
 const EV=(D.ev||[]); const brk=EV.filter(e=>!e.n), nof=EV.filter(e=>e.n), trapped=EV.filter(e=>e.t), trappedNof=trapped.filter(e=>e.n);
@@ -368,15 +514,6 @@ let hrs=0, down=0; use.forEach(r=>{hrs+=(todayEnd-r.com)/36e5;}); EV.forEach(e=>
 const avail=hrs>0?(1-down/hrs)*100:null;
 const urgent=(D.m?Object.values(D.m).flat().filter(Boolean):[]).reduce((a,m)=>({ok:a.ok+m.sm,miss:a.miss+m.sx}),{ok:0,miss:0});
 const firstUse=use.length?new Date(Math.min(...use.map(r=>r.com))):null;
-$('inuseSub').textContent=firstUse?'From '+fD(firstUse)+', when the first new lift came into use, to '+fD(today)+'. Counts come from calls logged with TKE.':'';
-const facts=[
-  {n:brk.length,l:'breakdowns and faults',s:(nof.length?'Plus '+pl(nof.length,'call')+' where TKE found no fault with the lift. ':'')+'Across '+pl(use.length,'lift')+' in use.',c:''},
-  {n:trapped.length,l:trapped.length===1?'time people were trapped':'times people were trapped',s:trappedNof.length?pl(trappedNof.length,'of these was','of these were')+' not a lift fault, per TKE (e.g. power cut).':'',c:trapped.length?'bad':'good'},
-  {n:urgent.ok+' of '+(urgent.ok+urgent.miss),l:'urgent calls reached in time',s:'Trapped: '+(U.a<1?Math.round(U.a*60)+' min':U.a+' hrs')+' promise. Stopped lift: '+U.b+' hrs. '+(urgent.miss?pl(urgent.miss,'miss','misses')+' listed below.':''),c:urgent.miss?'warn':'good'},
-  {n:avail!=null?avail.toFixed(1)+'%':'–',l:'of the time lifts were running',s:'TKE promised at least '+(U.uptime||95)+'% for each lift, every month. About '+Math.round(down)+' lift-hours lost in total.',c:avail!=null&&avail<(U.uptime||95)?'bad':'good'}
-];
-$('facts').innerHTML=facts.map(f=>'<div class="fact '+f.c+'"><div class="num">'+f.n+'</div><div class="lbl">'+f.l+'</div><div class="sub">'+esc(f.s)+'</div></div>').join('');
-
 // ---------- lift cards ----------
 $('blkKey').innerHTML='<span><i style="background:var(--good-bg);outline:1px solid var(--good)"></i>No breakdown</span><span><i style="background:var(--warn-bg);outline:1px solid var(--warn)"></i>1 breakdown (TKE\'s limit)</span><span><i style="background:var(--bad-bg);outline:1px solid var(--bad)"></i>2 or more (over the limit)</span><span><i style="background:var(--bad);border-radius:50%"></i>People trapped</span><span><i style="background:var(--idle);border-radius:6px"></i>No fault found (count)</span><span><i style="outline:1.5px dashed var(--muted);outline-offset:-1.5px"></i>Period still running</span>';
 function blocks(r){
@@ -403,26 +540,37 @@ function minitl(r){
   return h+'</div><div class="tlcap"><span>'+fDs(t0)+'</span><span>'+fDs(t1)+'</span></div>';
 }
 function card(r){
-  const l=r.l, chip=r.status==='use'?'In use':r.status==='work'?'Being installed':'Not started';
+  const l=r.l, chip=r.status==='use'?'In use':r.status==='work'?'Being installed':'Yet to start';
+  if(r.status==='none') return '<article class="card mini" id="lift-'+l.id+'"><div class="mini-row"><h3>'+esc(shortName(l))+'</h3><span class="mini-sub">'+esc(l.building)+(l.job?' · TKE no. '+esc(l.job.replace('7-97-25-M-','')):'')+'</span><span class="mini-txt">Installation work yet to start</span><span class="chip none">'+chip+'</span></div></article>';
   let h='<article class="card" id="lift-'+l.id+'"><div class="card-h"><div><h3>'+esc(shortName(l))+'</h3><small>'+esc(l.building)+(l.job?' · TKE no. '+esc(l.job.replace('7-97-25-M-','')):'')+'</small></div><span class="chip '+r.status+'">'+chip+'</span></div>';
-  h+='<dl class="kv">';
+  { const g=ragOf(r);
+    const line=r.status==='use'?'In use since '+fDs(r.com)+' · '+pl(g.bk,'breakdown')+' · '+(g.up>=99.95?'100':g.up.toFixed(1))+'% running':r.status==='work'?'Being installed since '+fDs(r.st):'Installation work yet to start';
+    h+='<p class="cline">'+esc(line)+'</p><div class="rag"><span title="Installation: '+esc(g.inst.t)+'"><i class="dot '+g.inst.c+'"></i>Installation</span><span title="Lift health: '+esc(g.health.t)+'"><i class="dot '+g.health.c+'"></i>Lift health</span><span title="TKE service: '+esc(g.svc.t)+'"><i class="dot '+g.svc.c+'"></i>TKE service</span><button type="button" class="howmini" data-how>How these are measured</button></div>'; }
+  h+='<div class="cbody"><div class="cl"><dl class="kv">';
   h+='<dt>Work started</dt><dd>'+(r.st?fDs(r.st):'Not yet')+'</dd>';
   if(r.pe) h+=r.x.basis==='phase'?'<dt>TKE schedule</dt><dd>'+fDs(r.ps)+' to '+fDs(r.pe)+'</dd>':'<dt>Due by</dt><dd>'+fDs(r.pe)+' ('+r.planDur+' days from start)</dd>';
   h+='<dt>In use from</dt><dd>'+(r.com?fDs(r.com):'–')+'</dd>';
   if(r.late!=null) h+='<dt>Vs due date</dt><dd>'+(r.com?(r.late>0?'<span class="late">'+pl(r.late,'day')+' late</span>':'<span class="ontime">On time</span>'):(r.late>0?'<span class="late">'+pl(r.late,'day')+' past '+(r.x.basis==='phase'?'TKE\'s scheduled finish':'due date')+'</span>':'Within time so far'))+(r.days!=null&&r.com?' · took '+r.days+' days':'')+'</dd>';
-  if(r.x.excReason&&r.late>0) h+='<dt>Reason given</dt><dd>'+esc(r.x.excReason)+' <span class="muted">'+(pendingR(r)?'(under discussion: days outside TKE\'s control not yet agreed)':'('+pl(r.x.excused,'day')+' accepted)')+'</span></dd>';
-  h+='</dl>'+minitl(r);
+  if(r.late>0&&r.com&&!pendingR(r)){ const nl=Math.max(0,netLate(r)), ex=r.x.excused||0;
+    h+='<dt>On account of TKE</dt><dd class="nc">'+(nl>0?'<span class="late">'+pl(nl,'day')+' late</span>':'<span class="ontime">None</span>')+(ex?' <span class="muted">('+(/waive/i.test(r.x.excReason||'')?pl(ex,'day')+' delay waived by the society':'after deducting '+pl(ex,'day')+' of delay on YYV\'s side')+')</span>':'')+'</dd>'; }
+  const ic=(D.claims||{})['INST-'+l.id];
+  if(ic&&ic.comp==='Agreed') h+='<dt>Compensation</dt><dd class="nc"><span class="ontime">Secured</span>: '+esc((ic.reply||'agreed with TKE').replace(/^TKE agreed to /,'').replace(/ on this lift\.?$/,''))+'</dd>';
+  if(r.x.excReason&&r.late>0&&!/waive/i.test(r.x.excReason)) h+='<dt>Reason given</dt><dd>'+esc(r.x.excReason)+' <span class="muted">'+(pendingR(r)?'(under discussion: days outside TKE\'s control not yet agreed)':'('+pl(r.x.excused,'day')+' accepted)')+'</span></dd>';
+  h+='</dl>';
+  let right=minitl(r);
   if(r.com){
     const bk=r.ev.filter(e=>!e.n).length, nf=r.ev.filter(e=>e.n).length, tr=r.ev.filter(e=>e.t).length, dh=r.ev.reduce((s,e)=>s+(e.dh||0),0);
-    h+=blocks(r);
-    const bits=['<b>'+pl(bk,'breakdown')+'</b>']; if(nf) bits.push(pl(nf,'no-fault call')); if(tr) bits.push('<b style="color:var(--bad)">trapped '+pl(tr,'time')+'</b>');
+    right+=blocks(r);
+    const nreg=r.ev.filter(e=>!e.n&&e.r).length;
+    const bits=['<b>'+pl(bk,'breakdown')+'</b>'+(nreg?' ('+nreg+' from the society\'s register)':'')]; if(nf) bits.push(pl(nf,'no-fault call')); if(tr) bits.push('<b style="color:var(--bad)">trapped '+pl(tr,'time')+'</b>');
     if(dh>0) bits.push(hm(dh)+' out of service'); if(r.br.length) bits.push('<b style="color:var(--bad)">TKE late '+pl(r.br.length,'time')+'</b>');
-    h+='<p class="sum">Since '+fDs(r.com)+': '+bits.join(' · ')+'</p>';
+    right+='<p class="sum">Since '+fDs(r.com)+': '+bits.join(' · ')+'</p>';
   } else if(r.status==='none'){
-    h+='<p class="sum">'+(r.late>0?'TKE\'s schedule had this lift finished by '+fDs(r.pe)+'. ':'')+'Work has not started.</p>';
+
   }
   const ra=(D.ra||[]).filter(a=>a.lift===l.id&&!/^done$/i.test(a.status||''));
   if(ra.length) h+='<p class="note"><b>'+esc(ra[0].status||'Action')+':</b> <a href="#resident">'+esc(ra.map(a=>a.action).join(' '))+'</a></p>';
+  h+='</div>'+(right?'<div class="cr">'+right+'</div>':'')+'</div>';
   return h+'</article>';
 }
 $('liftGroups').innerHTML=B.map(b=>'<div class="bgroup"><h3>'+esc(b)+'</h3><div class="cards">'+R.filter(r=>r.l.building===b).map(card).join('')+'</div></div>').join('');
@@ -451,7 +599,7 @@ function meter(prom,act,pLab,aLab,l){
   return '<div class="meter l'+l+'" aria-hidden="true"><div class="mbar"><span class="mp" style="width:'+w.toFixed(1)+'%"></span><span class="mo"></span></div></div>'+
     '<div class="mlab"><span>'+pLab+'</span><span>'+aLab+'</span></div>';
 }
-function card2(l,head,chips,body){ return '<div class="act sv'+l+'"><div class="act-h"><b>'+head+'</b><span class="chips">'+sevBadge(l)+chips+'</span></div>'+body+'</div>'; }
+function card2(l,head,chips,body,ref){ return '<div class="act sv'+l+'"'+(ref?' data-ref="'+ref+'"':'')+'><div class="act-h"><b>'+head+'</b><span class="chips">'+sevBadge(l)+chips+'</span></div>'+body+'</div>'; }
 function svcList(){ return (D.br||[]).map(b=>({b,s:sevResp(b)})).sort((x,y)=>y.s.l-x.s.l||(y.b.on||y.b.d).localeCompare(x.b.on||x.b.d)); }
 function svcActs(){
   const list=svcList();
@@ -466,7 +614,7 @@ function svcActs(){
       (over!=null?': <b class="late">'+hm(over)+' late, '+xTimes(s.r)+' the promised time</b>':'')+'.</p>'+
       (b.resp!=null&&b.limit?meter(b.limit,b.resp,'Promised '+prom,'Took '+hm(b.resp),s.l):'')+claimGrid(c)+
       (notes.length?'<p class="note">'+esc(notes.join(' '))+'</p>':'');
-    return card2(s.l,fD(on)+(b.on?', '+fT(on):'')+' · '+esc(fullName(l)),claimChip(c),body); }).join('');
+    return card2(s.l,fD(on)+(b.on?', '+fT(on):'')+' · '+esc(fullName(l)),claimChip(c),body,b.ref); }).join('');
 }
 function instList(){ return R.filter(r=>r.late>0&&(pendingR(r)||netLate(r)>0)).map(r=>({r,l:sevInst(r)})).sort((a,b)=>b.l-a.l||b.r.late-a.r.late); }
 function instNote(){ return doneInst.length?'<p class="note" style="margin:4px 0 8px">Already agreed: '+doneInst.map(a=>esc(a.what)+(a.lifts?' ('+esc(a.lifts)+')':'')).join(' ')+' <a href="#done">See action already taken</a>.</p>':''; }
@@ -475,13 +623,13 @@ function instActs(){
   if(!list.length) return '<p class="muted">No late installations.</p>';
   return list.map(({r,l})=>{
     const what=r.com?'Came into use '+pl(r.late,'day')+' after the '+r.planDur+'-day contract period':(r.st?'Still being installed, '+pl(r.late,'day')+' past the '+r.planDur+'-day contract period':'Not started, '+pl(r.late,'day')+' past TKE\'s scheduled finish');
-    const exc=r.x.excused?pl(r.x.excused,'day')+' accepted as not TKE\'s fault'+(r.x.excReason?' ('+esc(r.x.excReason)+')':'')+', so <b>'+pl(netLate(r),'day')+'</b> count against TKE.':
+    const exc=r.x.excused?pl(r.x.excused,'day')+' accepted as not TKE\'s fault'+(r.x.excReason?': '+esc(r.x.excReason.replace(/\.\s*$/,''))+'.':'.')+' So <b>'+pl(netLate(r),'day')+'</b> count against TKE.':
       (r.x.excReason?'<b>Reason given for the delay:</b> '+esc(r.x.excReason)+' The society is working out how many of these days were outside TKE\'s control. The rating will be set once that is agreed.':'');
     const c=claimOf('INST-'+r.l.id);
     const m=r.x.basis==='contract'&&r.planDur?meter(r.planDur,r.planDur+r.late,'Allowed '+r.planDur+' days','Took '+(r.planDur+r.late)+' days'+((r.planDur+r.late)/r.planDur>=1.5?' ('+xTimes((r.planDur+r.late)/r.planDur)+')':''),l):'';
     const body='<p class="what">'+what+(r.pe?(r.x.basis==='phase'?' (schedule: '+fDs(r.ps)+' to '+fDs(r.pe)+')':' (work started '+fDs(r.ps)+', due by '+fDs(r.pe)+')'):'')+'.</p>'+m+claimGrid(c)+
       (exc?'<p class="note">'+exc+'</p>':'');
-    return card2(l,esc(fullName(r.l)),claimChip(c),body); }).join('');
+    return card2(l,esc(fullName(r.l)),claimChip(c),body,'INST-'+r.l.id); }).join('');
 }
 function bkList(){ const out=[]; R.forEach(r=>{ const P=periods(r), nOver=P.filter(p=>p.bk>BK_LIMIT).length; P.forEach((p,k)=>{ if(p.bk>BK_LIMIT) out.push({r,p,k,nOver,nP:P.length,l:sevBk(r,p)}); }); }); return out.sort((x,y)=>y.l-x.l||y.p.a-x.p.a); }
 function bkActs(){
@@ -494,7 +642,7 @@ function bkActs(){
       (dh>0?' Out of service <b>'+hm(dh)+'</b> in this period ('+p.up.toFixed(1)+'% running).':'')+(p.tr?' <b class="late">People were trapped in this period.</b>':'')+'</p>'+
       meter(BK_LIMIT,p.bk,'Allowed '+pl(BK_LIMIT,'breakdown'),pl(p.bk,'breakdown'),l)+claimGrid(claimOf(ref))+
       '<p class="note">'+esc(ctx+' Lift in use since '+fDs(r.com)+'.')+'</p>';
-    return card2(l,esc(fullName(r.l))+' · '+fDs(p.a)+' to '+fDs(end)+(p.part?' (so far)':''),claimChip(claimOf(ref)),body); }).join('');
+    return card2(l,esc(fullName(r.l))+' · '+fDs(p.a)+' to '+fDs(end)+(p.part?' (so far)':''),claimChip(claimOf(ref)),body,ref); }).join('');
 }
 (function(){
   const refs=[...(D.br||[]).map(b=>b.ref),...bkList().map(({r,k})=>'BK-'+r.l.id+'-P'+(k+1)),...instList().map(x=>'INST-'+x.r.l.id)];
@@ -511,7 +659,7 @@ function bkActs(){
     sevBadge(0)+' installation delay where a reason outside TKE\'s control has been given and the days are still being agreed. Installation delays are rated on the days that count against TKE.</p>';
 })();
 // long text: show the first lines, 'More' expands
-const CLAMP_SEL='.act .what, .act .note, .kv dd';
+const CLAMP_SEL='.act .what, .act .note, .kv dd:not(.nc)';
 function clampAll(root){
   root.querySelectorAll(CLAMP_SEL).forEach(el=>{
     if(el.dataset.cl) return; el.dataset.cl='1';
@@ -545,8 +693,7 @@ $('promiseList').innerHTML=[
   'Each lift runs at least <b>'+(U.uptime||95)+'%</b> of the time in every month.',
   'Not more than '+BK_LIMIT+' breakdown per lift in a month.',
   'Preventive maintenance: 100% of scheduled visits every month.',
-  'There is no fixed time limit for completing a repair.',
-  'Installation: each lift within <b>'+(D.contract||90)+' days</b> of work starting.'+(planEnd?' TKE\'s schedule had all nine lifts finished by <b>'+fD(planEnd)+'</b>.':'')
+  'Installation: each lift within <b>'+(D.contract||100)+' days</b> of work starting.'
 ].filter(Boolean).map(s=>'<li>'+s+'</li>').join('');
 
 // ---------- residents' concerns ----------
@@ -558,17 +705,107 @@ $('raList').innerHTML=RA.length?RA.map(a=>{ const st=a.status||'', where=a.where
     '<p class="what"><b>Action:</b> '+esc(a.action)+'</p>'+
     '<div class="grid"><div><span>Decided by</span>'+(a.by?esc(a.by):NODATA)+'</div><div><span>Target date</span>'+(a.target?fD(toD(a.target)):NODATA)+'</div></div>'+
     (a.update?'<p class="note">Latest: '+esc(a.update)+'</p>':'')+'</div>'; }).join(''):'<p class="muted">No actions recorded yet.</p>';
-// action cards under 'Since the new lifts came into use'
+// ---------- lift project snapshot ----------
 (function(){
   const done=D.done||[];
-  const nRec=(D.br||[]).length+bkList().length+instList().length;
+  const recRefs=[...(D.br||[]).map(b=>b.ref),...bkList().map(({r,k})=>'BK-'+r.l.id+'-P'+(k+1)),...instList().map(x=>'INST-'+x.r.l.id)];
+  const st=recRefs.map(x=>claimOf(x).status), nSet=st.filter(x=>x==='Settled').length, nClosed=st.filter(x=>/^Closed/.test(x)).length, nOpen=recRefs.length-nSet-nClosed;
   const lv=[...svcList().map(x=>x.s.l),...bkList().map(x=>x.l),...instList().map(x=>x.l)], cnt=k=>lv.filter(v=>v===k).length;
   const sevTxt=[3,2,1,0].filter(k=>cnt(k)).map(k=>cnt(k)+' '+SEVN[k].toLowerCase()).join(', ');
-  $('factsAct').innerHTML=
-    '<a class="fact good act-done" href="#done"><div class="num">'+done.length+'</div><div class="lbl">'+(done.length===1?'action already taken':'actions already taken')+'</div>'+
-      '<div class="sub">'+(done.length?esc(done[0].what)+(done.length>1?' And '+(done.length-1)+' more.':''):'None recorded yet.')+'</div><div class="go">See what was agreed</div></a>'+
-    '<a class="fact warn act-rec" href="#actions"><div class="num">'+nRec+'</div><div class="lbl">times TKE missed a promise, recorded by the society</div>'+
-      '<div class="sub">Late responses, too many breakdowns and late installation ('+esc(sevTxt)+'). Each one is under discussion with TKE.</div><div class="go">See each one and its status</div></a>';
+  const tkeLate=use.filter(r=>!pendingR(r)&&netLate(r)>0), tkeOk=use.filter(r=>r.late!=null&&!pendingR(r)&&netLate(r)<=0);
+  const comp=tkeLate.filter(r=>((D.claims||{})['INST-'+r.l.id]||{}).comp==='Agreed');
+  const nl=tkeLate.map(r=>netLate(r));
+  const card=(cls,href,title,num,lbl,items,go,extra)=>'<a class="snapc '+cls+'" href="'+href+'"><h3>'+title+'</h3><div class="num">'+num+'</div><div class="lbl">'+lbl+'</div>'+(extra||'')+'<ul>'+items.filter(Boolean).map(t=>'<li>'+t+'</li>').join('')+'</ul><div class="go">'+go+'</div></a>';
+  const segs='<div class="segs" aria-hidden="true">'+order.map(r=>'<span style="background:var('+COL[r.status]+')"></span>').join('')+'</div>';
+  $('snapSub').textContent=firstUse?'From '+fD(firstUse)+', when the first new lift came into use, to '+fD(today)+'.':'';
+  $('snap').innerHTML=
+    card('g','#lifts','Installation',use.length+' of '+R.length,'lifts in use',[
+      work.length?pl(work.length,'lift')+' being installed.':'',
+      none.length?pl(none.length,'lift')+' yet to start installation work.':'',
+      tkeOk.length+' of '+use.length+' ready within '+CD+' days, once agreed society-side delays are taken off.',
+      tkeLate.length?pl(tkeLate.length,'lift')+' late on TKE\'s account ('+(Math.min(...nl)===Math.max(...nl)?pl(nl[0],'day'):Math.min(...nl)+'–'+Math.max(...nl)+' days)')+(comp.length===tkeLate.length?', all compensated.':comp.length?', '+comp.length+' compensated.':'.'):''
+    ],'See each lift',segs)+
+    card(avail!=null&&avail<(U.uptime||95)?'r':'g','#lifts','Performance',avail!=null?avail.toFixed(1)+'%':'–','of the time lifts were running',[
+      'TKE promised at least '+(U.uptime||95)+'% for each lift.',
+      pl(brk.length,'breakdown')+(brk.filter(e=>e.r).length?', of which '+brk.filter(e=>e.r).length+' from the society\'s own register':'')+(nof.length?' (plus '+pl(nof.length,'call')+' with no fault found by TKE).':'.'),
+      'People trapped '+pl(trapped.length,'time')+'.',
+      'TKE reached '+urgent.ok+' of '+(urgent.ok+urgent.miss)+' urgent calls on time.'
+    ],'See each lift')+
+    card('g','#done','Action taken',done.length,done.length===1?'agreement secured from TKE':'agreements secured from TKE',[
+      done.length?esc(done[0].what)+(done.length>1?' And '+(done.length-1)+' more.':''):'None recorded yet.',
+      nSet?pl(nSet,'missed promise')+' settled.':''
+    ],'See what was agreed')+
+    card(nOpen?'a':'g','#actions','Missed promises',nOpen,'under discussion with TKE',[
+      recRefs.length+' recorded in total'+(nSet?', '+nSet+' settled':'')+(nClosed?', '+nClosed+' closed':'')+'.',
+      sevTxt?'How serious: '+sevTxt+'.':''
+    ],'See each one and its status');
+})();
+// ---------- 'How each lift is measured' lightbox (big screens) ----------
+(function(){
+  const dlg=$('howDlg'); if(!dlg) return;
+  const li=(c,t)=>'<li><i class="dot '+c+'"></i><span>'+t+'</span></li>';
+  const upt=(U.uptime||95), cd=(D.contract||100);
+  $('howGrid').innerHTML=
+    '<div class="how-c"><h3>Installation</h3><p class="q">Was the lift ready within TKE\'s '+cd+'-day contract period, counted from the day work started? Days lost to work on YYV\'s side are taken off first.</p><ul>'+
+      li('g','Ready within '+cd+' days')+li('a','Up to '+RAG_I.amberMax+' days late on TKE\'s account, or still being installed')+li('r','More than '+RAG_I.amberMax+' days late on TKE\'s account')+li('n','Yet to start')+'</ul></div>'+
+    '<div class="how-c"><h3>Lift health</h3><p class="q">Breakdowns and running time, checked in every 30 days since the lift came into use. TKE\'s limit: '+pl(BK_LIMIT,'breakdown')+' a month, and running at least '+upt+'% of the time.</p><ul>'+
+      li('g','Never more than '+pl(BK_LIMIT,'breakdown')+' in any 30 days')+li('a','Over the limit in one 30-day period')+li('r','Over the limit in two or more periods, or running under '+upt+'% in any period')+li('n','In use for less than '+MIN_DAYS+' days')+'</ul></div>'+
+    '<div class="how-c"><h3>TKE service</h3><p class="q">How fast TKE reached urgent calls: within '+(U.a<1?Math.round(U.a*60)+' minutes':U.a+' hours')+' when people are trapped, and '+U.b+' hours when a lift has stopped ('+U.bSun+' on Sundays and holidays).</p><ul>'+
+      li('g','On time for every urgent call')+li('a','Late to a stopped lift')+li('r','Late when people were trapped')+li('n','No urgent calls yet')+'</ul></div>';
+  $('howFoot').innerHTML='<b>Breakdown boxes</b> (one box per 30 days since in use):'+
+    '<span class="bx"><i style="background:var(--good-bg);outline:1px solid var(--good)"></i>No breakdown</span>'+
+    '<span class="bx"><i style="background:var(--warn-bg);outline:1px solid var(--warn)"></i>1, at TKE\'s limit</span>'+
+    '<span class="bx"><i style="background:var(--bad-bg);outline:1px solid var(--bad)"></i>2 or more, over the limit</span>'+
+    '<span class="bx"><i style="outline:1.5px dashed var(--muted);outline-offset:-1.5px"></i>Period still running</span>'+
+    '<span class="bx"><i style="width:14px;height:14px;border-radius:50%;background:var(--bad)"></i>People trapped in that period</span>'+
+    '<span class="bx"><i style="width:18px;height:18px;border-radius:50%;background:var(--idle)"></i>Calls where TKE found no fault (count), not counted as breakdowns</span>';
+  const open=()=>{ try{dlg.showModal();}catch(e){dlg.setAttribute('open','');} };
+  document.addEventListener('click',e=>{ if(e.target.closest('[data-how]')) open(); });
+  $('howClose').addEventListener('click',()=>dlg.close());
+  dlg.addEventListener('click',e=>{ if(e.target===dlg) dlg.close(); });
+})();
+// ---------- missed promises board ----------
+(function(){
+  const ICON={
+    svc:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+    bk:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4M12 17h.01"/></svg>',
+    inst:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>'};
+  const nm=id=>{const l=liftOf(id); return l.building+' '+(id.endsWith('S1')?'Service':'Lift '+id.slice(-1));};
+  const items=[];
+  svcList().forEach(({b,s:sv})=>items.push({ref:b.ref,type:'svc',sev:sv.l,lift:b.lift,d:toD(b.on||b.d),
+    mt:(b.t?'Trapped':'Stopped')+': '+hm(b.resp)+' vs '+hm(b.limit)}));
+  bkList().forEach(({r,p,k,l})=>items.push({ref:'BK-'+r.l.id+'-P'+(k+1),type:'bk',sev:l,lift:r.l.id,d:p.a,
+    mt:pl(p.bk,'breakdown')+' in 30 days'+(p.tr?', trapped':'')}));
+  instList().forEach(({r,l})=>items.push({ref:'INST-'+r.l.id,type:'inst',sev:l,lift:r.l.id,d:r.pe,
+    mt:(pendingR(r)?r.late+' days late':Math.max(0,netLate(r))+' days late on TKE')}));
+  const stOf=x=>claimOf(x.ref).status, isDone=x=>stOf(x)==='Settled', isClosed=x=>/^Closed/.test(stOf(x));
+  const nDone=items.filter(isDone).length, nClosed=items.filter(isClosed).length, nOpen=items.length-nDone-nClosed, N=items.length||1;
+  const lbl=x=>{const s=stOf(x); return s==='Settled'?'✓ Settled'+(claimOf(x.ref).comp==='Agreed'?', compensation secured':''):/^Closed/.test(s)?'Closed':s==='Logged'?'Under discussion':s;};
+  const sevs=[3,2,1].concat(items.some(x=>x.sev===0)?[0]:[]);
+  const TYPES=[['svc','Late response','TKE reached an urgent call late'],['bk','Too many breakdowns','More than '+pl(BK_LIMIT,'breakdown')+' in 30 days'],['inst','Late installation','Beyond '+(D.contract||100)+' days, on TKE\'s account']];
+  let h='<div class="mp-prog"><div class="t"><b>'+nDone+' of '+items.length+' settled</b><span>'+nOpen+' under discussion with TKE'+(nClosed?' · '+nClosed+' closed':'')+'</span></div>'+
+    '<div class="mp-bar" aria-hidden="true"><i class="g" style="width:'+(nDone/N*100)+'%"></i><i class="a" style="width:'+(nOpen/N*100)+'%"></i><i class="n" style="width:'+(nClosed/N*100)+'%"></i></div>'+
+    '<div class="mp-leg"><span><i style="background:var(--good)"></i>Settled</span><span><i style="background:var(--warn)"></i>Under discussion</span>'+(nClosed?'<span><i style="background:var(--idle)"></i>Closed</span>':'')+'</div></div>';
+  h+='<div class="mp-grid" style="--cols:'+sevs.length+'"><div></div>'+sevs.map(v=>'<div class="mp-ch">'+sevBadge(v)+'</div>').join('');
+  TYPES.forEach(([t,title,sub])=>{
+    const its=items.filter(x=>x.type===t);
+    h+='<div class="mp-rh"><b>'+ICON[t]+title+' ('+its.length+')</b><span>'+sub+'</span></div>';
+    sevs.forEach(v=>{ const c=its.filter(x=>x.sev===v).sort((a,b)=>isDone(a)-isDone(b)||b.d-a.d);
+      h+='<div class="mp-cell c'+v+(c.length?'':' empty')+'" data-sev="'+SEVN[v]+'">'+(c.length?c.map(x=>
+        '<button type="button" class="mpt s'+x.sev+(isDone(x)?' done':'')+'" data-mp="'+x.ref+'"><span class="lf">'+esc(nm(x.lift))+'</span><span class="mt">'+esc(x.mt)+'</span><span>'+fDs(x.d)+'</span><span class="st">'+esc(lbl(x))+'</span></button>').join(''):'<span class="none">None</span>')+'</div>'; });
+  });
+  h+='</div>';
+  $('mpBoard').innerHTML=h;
+  $('mpStore').innerHTML=svcActs()+bkActs()+instActs();
+  const dlg=$('mpDlg');
+  $('mpBoard').addEventListener('click',e=>{ const b=e.target.closest('[data-mp]'); if(!b) return;
+    const src=$('mpStore').querySelector('[data-ref="'+b.dataset.mp+'"]'); if(!src) return;
+    const it=items.find(x=>x.ref===b.dataset.mp);
+    $('mpTitle').textContent=(it?{svc:'Late response',bk:'Too many breakdowns',inst:'Late installation'}[it.type]+' · ':'')+nm(it?it.lift:'');
+    $('mpBody').innerHTML=''; $('mpBody').appendChild(src.cloneNode(true));
+    try{dlg.showModal();}catch(err){dlg.setAttribute('open','');} });
+  $('mpClose').addEventListener('click',()=>dlg.close());
+  dlg.addEventListener('click',e=>{ if(e.target===dlg) dlg.close(); });
 })();
 clampAll(document);
 })();
